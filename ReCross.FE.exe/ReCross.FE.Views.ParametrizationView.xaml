@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserControlItemBase x:Class="ReCross.FE.Views.ParametrizationView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:strillsUIControls="clr-namespace:Strills.WPF.UI.Controls;assembly=Strills.WPF.UI" xmlns:strillsUICommands="clr-namespace:Strills.WPF.UI.Commands;assembly=Strills.WPF.UI" xmlns:converters="clr-namespace:ReCross.FE.Converters" xmlns:viewModels="clr-namespace:ReCross.FE.ViewModels" xmlns:views="clr-namespace:ReCross.FE.Views" Height="Auto" Width="Auto" Loaded="UserControl_Loaded">
+  <FrameworkElement.Resources>
+    <ResourceDictionary>
+      <TranslateTransform x:Key="itemListStackPanelTransformTabs" X="-2500" />
+      <TranslateTransform x:Key="itemStackPanelTransformTabs" X="-2500" Y="-520" />
+    </ResourceDictionary>
+  </FrameworkElement.Resources>
+  <TabControl>
+    <TabItem IsSelected="True" Header="{Resx ResxName=ReCross.FE.Views.ParametrizationView, Key=L_BankEntity}" IsEnabled="{Binding Source={x:Static Application.Current}, Path=StateData.IsNotViewingNetherEditingMode, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding Source={x:Static Application.Current}, Path=UserGenericPermissions, Converter={x:Static converters:ItemVisibilityConverter.Instance}, ConverterParameter=BankEntities}">
+      <StackPanel Visibility="{Binding Source={x:Static Application.Current}, Path=UserGenericPermissions, Converter={x:Static converters:ItemVisibilityConverter.Instance}, ConverterParameter=BankEntities}">
+        <FrameworkElement.DataContext>
+          <MultiBinding Converter="{x:Static viewModels:BankEntityCollConverter.Instance}" ConverterParameter="{StaticResource viewModelBankEntity}">
+            <Binding Source="{x:Static Application.Current}" Path="StateData.IsLoggedIn" />
+          </MultiBinding>
+        </FrameworkElement.DataContext>
+        <StackPanel Name="SPItemList0" Style="{StaticResource itemListStackPanel}" RenderTransform="{StaticResource itemListStackPanelTransformTabs}" MinHeight="520" MaxHeight="520">
+          <Border Style="{StaticResource entityViewBorder}">
+            <WrapPanel Style="{StaticResource itemListWrapPanel}" Height="470">
+              <views:BankEntityViewGrid />
+            </WrapPanel>
+          </Border>
+        </StackPanel>
+        <StackPanel Name="SPItem0" Style="{StaticResource itemStackPanel}" RenderTransform="{StaticResource itemStackPanelTransformTabs}" MinHeight="520" MaxHeight="520">
+          <Border Style="{StaticResource entityViewBorder}">
+            <views:BankEntityViewForm />
+          </Border>
+        </StackPanel>
+      </StackPanel>
+    </TabItem>
+    <TabItem IsSelected="True" Header="{Resx ResxName=ReCross.FE.Views.ParametrizationView, Key=L_SoftwareEntity}" IsEnabled="{Binding Source={x:Static Application.Current}, Path=StateData.IsNotViewingNetherEditingMode, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding Source={x:Static Application.Current}, Path=UserGenericPermissions, Converter={x:Static converters:ItemVisibilityConverter.Instance}, ConverterParameter=SoftwareEntities}">
+      <StackPanel Visibility="{Binding Source={x:Static Application.Current}, Path=UserGenericPermissions, Converter={x:Static converters:ItemVisibilityConverter.Instance}, ConverterParameter=Persons}">
+        <FrameworkElement.DataContext>
+          <MultiBinding Converter="{x:Static viewModels:SoftwareEntityCollConverter.Instance}" ConverterParameter="{StaticResource viewModelSoftwareEntity}">
+            <Binding Source="{x:Static Application.Current}" Path="StateData.IsLoggedIn" />
+          </MultiBinding>
+        </FrameworkElement.DataContext>
+        <StackPanel Name="SPItemList1" Style="{StaticResource itemListStackPanel}" RenderTransform="{StaticResource itemListStackPanelTransformTabs}" MinHeight="520" MaxHeight="520">
+          <Border Style="{StaticResource entityViewBorder}">
+            <WrapPanel Style="{StaticResource itemListWrapPanel}" Height="470">
+              <views:SoftwareEntityViewGrid />
+            </WrapPanel>
+          </Border>
+        </StackPanel>
+        <StackPanel Name="SPItem1" Style="{StaticResource itemStackPanel}" RenderTransform="{StaticResource itemStackPanelTransformTabs}" MinHeight="520" MaxHeight="520">
+          <Border Style="{StaticResource entityViewBorder}">
+            <views:SoftwareEntityViewForm />
+          </Border>
+        </StackPanel>
+      </StackPanel>
+    </TabItem>
+    <TabItem IsSelected="True" Header="{Resx ResxName=ReCross.FE.Views.ParametrizationView, Key=L_BankMovementParam}" IsEnabled="{Binding Source={x:Static Application.Current}, Path=StateData.IsNotViewingNetherEditingMode, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding Source={x:Static Application.Current}, Path=UserGenericPermissions, Converter={x:Static converters:ItemVisibilityConverter.Instance}, ConverterParameter=BankMovementParam}">
+      <StackPanel Visibility="{Binding Source={x:Static Application.Current}, Path=UserGenericPermissions, Converter={x:Static converters:ItemVisibilityConverter.Instance}, ConverterParameter=BankMovementParam}">
+        <FrameworkElement.DataContext>
+          <MultiBinding Converter="{x:Static viewModels:BankMovementParamCollConverter.Instance}" ConverterParameter="{StaticResource viewModelBankMovementParam}">
+            <Binding Source="{x:Static Application.Current}" Path="StateData.IsLoggedIn" />
+          </MultiBinding>
+        </FrameworkElement.DataContext>
+        <StackPanel Name="SPItemList2" Style="{StaticResource itemListStackPanel}" RenderTransform="{StaticResource itemListStackPanelTransformTabs}" MinHeight="520" MaxHeight="520">
+          <Border Style="{StaticResource entityViewBorder}">
+            <WrapPanel Style="{StaticResource itemListWrapPanel}" Height="500">
+              <views:BankMovementParamViewGrid />
+            </WrapPanel>
+          </Border>
+        </StackPanel>
+      </StackPanel>
+    </TabItem>
+    <TabItem Header="{Resx ResxName=ReCross.FE.Views.ParametrizationView, Key=L_SoftwareMovementParam}" IsEnabled="{Binding Source={x:Static Application.Current}, Path=StateData.IsNotViewingNetherEditingMode, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding Source={x:Static Application.Current}, Path=UserGenericPermissions, Converter={x:Static converters:ItemVisibilityConverter.Instance}, ConverterParameter=SoftwareMovementParam}">
+      <StackPanel Visibility="{Binding Source={x:Static Application.Current}, Path=UserGenericPermissions, Converter={x:Static converters:ItemVisibilityConverter.Instance}, ConverterParameter=SoftwareMovementParam}">
+        <FrameworkElement.DataContext>
+          <MultiBinding Converter="{x:Static viewModels:SWMovementParamCollConverter.Instance}" ConverterParameter="{StaticResource viewModelSWMovementParam}">
+            <Binding Source="{x:Static Application.Current}" Path="StateData.IsLoggedIn" />
+          </MultiBinding>
+        </FrameworkElement.DataContext>
+        <StackPanel Name="SPItemList3" Style="{StaticResource itemListStackPanel}" RenderTransform="{StaticResource itemListStackPanelTransformTabs}" MinHeight="520" MaxHeight="520">
+          <Border Style="{StaticResource entityViewBorder}">
+            <WrapPanel Style="{StaticResource itemListWrapPanel}" Height="500">
+              <views:SWMovementParamViewGrid />
+            </WrapPanel>
+          </Border>
+        </StackPanel>
+      </StackPanel>
+    </TabItem>
+    <TabItem Header="{Resx ResxName=ReCross.FE.Views.ParametrizationView, Key=L_Role}" IsEnabled="{Binding Source={x:Static Application.Current}, Path=StateData.IsNotViewingNetherEditingMode, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding Source={x:Static Application.Current}, Path=UserGenericPermissions, Converter={x:Static converters:ItemVisibilityConverter.Instance}, ConverterParameter=Roles}">
+      <StackPanel Visibility="{Binding Source={x:Static Application.Current}, Path=UserGenericPermissions, Converter={x:Static converters:ItemVisibilityConverter.Instance}, ConverterParameter=Roles}">
+        <FrameworkElement.DataContext>
+          <MultiBinding Converter="{x:Static viewModels:RoleCollConverter.Instance}" ConverterParameter="{StaticResource viewModelRole}">
+            <Binding Source="{x:Static Application.Current}" Path="StateData.IsLoggedIn" />
+          </MultiBinding>
+        </FrameworkElement.DataContext>
+        <StackPanel Name="SPItemList4" Style="{StaticResource itemListStackPanel}" RenderTransform="{StaticResource itemListStackPanelTransformTabs}" MinHeight="520" MaxHeight="520">
+          <Border Style="{StaticResource entityViewBorder}">
+            <WrapPanel Style="{StaticResource itemListWrapPanel}" Height="500">
+              <views:RoleViewGrid />
+            </WrapPanel>
+          </Border>
+        </StackPanel>
+      </StackPanel>
+    </TabItem>
+    <TabItem Header="{Resx ResxName=ReCross.FE.Views.ParametrizationView, Key=L_Group}" IsEnabled="{Binding Source={x:Static Application.Current}, Path=StateData.IsNotViewingNetherEditingMode, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding Source={x:Static Application.Current}, Path=UserGenericPermissions, Converter={x:Static converters:ItemVisibilityConverter.Instance}, ConverterParameter=Groups}">
+      <StackPanel Visibility="{Binding Source={x:Static Application.Current}, Path=UserGenericPermissions, Converter={x:Static converters:ItemVisibilityConverter.Instance}, ConverterParameter=Groups}">
+        <FrameworkElement.DataContext>
+          <MultiBinding Converter="{x:Static viewModels:GroupCollConverter.Instance}" ConverterParameter="{StaticResource viewModelGroup}">
+            <Binding Source="{x:Static Application.Current}" Path="StateData.IsLoggedIn" />
+          </MultiBinding>
+        </FrameworkElement.DataContext>
+        <StackPanel Name="SPItemList5" Style="{StaticResource itemListStackPanel}" RenderTransform="{StaticResource itemListStackPanelTransformTabs}" MinHeight="520" MaxHeight="520">
+          <Border Style="{StaticResource entityViewBorder}">
+            <WrapPanel Style="{StaticResource itemListWrapPanel}" Height="470">
+              <views:GroupViewGrid />
+            </WrapPanel>
+          </Border>
+        </StackPanel>
+        <StackPanel Name="SPItem5" Style="{StaticResource itemStackPanel}" RenderTransform="{StaticResource itemStackPanelTransformTabs}" MinHeight="520" MaxHeight="520">
+          <Border Style="{StaticResource entityViewBorder}">
+            <views:GroupViewForm />
+          </Border>
+        </StackPanel>
+      </StackPanel>
+    </TabItem>
+    <TabItem IsSelected="True" Header="{Resx ResxName=ReCross.FE.Views.ParametrizationView, Key=L_User}" IsEnabled="{Binding Source={x:Static Application.Current}, Path=StateData.IsNotViewingNetherEditingMode, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding Source={x:Static Application.Current}, Path=UserGenericPermissions, Converter={x:Static converters:ItemVisibilityConverter.Instance}, ConverterParameter=Users}">
+      <StackPanel Visibility="{Binding Source={x:Static Application.Current}, Path=UserGenericPermissions, Converter={x:Static converters:ItemVisibilityConverter.Instance}, ConverterParameter=Users}">
+        <FrameworkElement.DataContext>
+          <MultiBinding Converter="{x:Static viewModels:UserCollConverter.Instance}" ConverterParameter="{StaticResource viewModelUser}">
+            <Binding Source="{x:Static Application.Current}" Path="StateData.IsLoggedIn" />
+          </MultiBinding>
+        </FrameworkElement.DataContext>
+        <StackPanel Name="SPItemList6" Style="{StaticResource itemListStackPanel}" RenderTransform="{StaticResource itemListStackPanelTransformTabs}" MinHeight="520" MaxHeight="520">
+          <Border Style="{StaticResource entityViewBorder}">
+            <WrapPanel Style="{StaticResource itemListWrapPanel}" Height="470">
+              <views:UserViewGrid />
+            </WrapPanel>
+          </Border>
+        </StackPanel>
+        <StackPanel Name="SPItem6" Style="{StaticResource itemStackPanel}" RenderTransform="{StaticResource itemStackPanelTransformTabs}" MinHeight="520" MaxHeight="520">
+          <Border Style="{StaticResource entityViewBorder}">
+            <views:UserViewForm />
+          </Border>
+        </StackPanel>
+      </StackPanel>
+    </TabItem>
+    <TabItem Header="{Resx ResxName=ReCross.FE.Views.ParametrizationView, Key=L_ReconciliationResult}" IsEnabled="{Binding Source={x:Static Application.Current}, Path=StateData.IsNotViewingNetherEditingMode, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding Source={x:Static Application.Current}, Path=UserGenericPermissions, Converter={x:Static converters:ItemVisibilityConverter.Instance}, ConverterParameter=ReconciliationResults}">
+      <StackPanel Visibility="{Binding Source={x:Static Application.Current}, Path=UserGenericPermissions, Converter={x:Static converters:ItemVisibilityConverter.Instance}, ConverterParameter=ReconciliationResults}">
+        <FrameworkElement.DataContext>
+          <MultiBinding Converter="{x:Static viewModels:ReconciliationResultCollConverter.Instance}" ConverterParameter="{StaticResource viewModelReconciliationResult}">
+            <Binding Source="{x:Static Application.Current}" Path="StateData.IsLoggedIn" />
+            <Binding Source="{x:Static Application.Current}" Path="CurrentDataContext.DataFilters.CurrentEntity" />
+          </MultiBinding>
+        </FrameworkElement.DataContext>
+        <StackPanel Name="SPItemList7" Style="{StaticResource itemListStackPanel}" RenderTransform="{StaticResource itemListStackPanelTransformTabs}" MinHeight="520" MaxHeight="520">
+          <Border Style="{StaticResource entityViewBorder}">
+            <WrapPanel Style="{StaticResource itemListWrapPanel}" Height="500">
+              <views:ReconciliationResultViewGrid />
+            </WrapPanel>
+          </Border>
+        </StackPanel>
+      </StackPanel>
+    </TabItem>
+  </TabControl>
+</UserControlItemBase>

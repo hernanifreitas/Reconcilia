@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<strillsUIUserControls:UserControlGridBase x:Class="ReCross.FE.Views.SWMovementParamViewGrid" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:models="clr-namespace:ReCross.BE.DataObjects;assembly=ReCross.BE" xmlns:viewModels="clr-namespace:ReCross.FE.ViewModels" xmlns:converters="clr-namespace:ReCross.FE.Converters" xmlns:strillsUIUserControls="clr-namespace:Strills.WPF.UI.UserControls;assembly=Strills.WPF.UI" xmlns:strillsUICommands="clr-namespace:Strills.WPF.UI.Commands;assembly=Strills.WPF.UI" xmlns:strillsConverters="clr-namespace:Strills.WPF.Localization.Converters;assembly=Strills.WPF.Localization" Height="Auto" Width="Auto" xmlns:views="clr-namespace:ReCross.FE.Views" Loaded="UserControl_Loaded">
+  <FrameworkElement.Resources>
+    <ResourceDictionary>
+      <DataTemplate x:Key="columnEntity">
+        <Control Name="entity" Focusable="False">
+          <Control.Template>
+            <ControlTemplate>
+              <StackPanel>
+                <TextBlock TextAlignment="Center" Text="{Binding Path=Entity.ShortName}" />
+              </StackPanel>
+            </ControlTemplate>
+          </Control.Template>
+        </Control>
+        <DataTemplate.Triggers>
+          <DataTrigger Value="True" Binding="{Binding Path=IsEdited, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItemExtended}}}">
+            <Setter TargetName="entity" Property="Control.Template">
+              <Setter.Value>
+                <ControlTemplate>
+                  <ComboBox Name="CBEntity" Width="170" Height="25" SelectedItem="{Binding ValidatesOnDataErrors=True, ValidatesOnExceptions=True, NotifyOnValidationError=True, Path=Entity, Converter={x:Static strillsConverters:ComboBoxNullItemConverter.Instance}}" Validation.Error="InvalidType_Error">
+                    <ItemsControl.ItemsSource>
+                      <MultiBinding Converter="{x:Static converters:ComboBoxItemsConverter.Instance}" ConverterParameter="SoftwareEntities">
+                        <Binding Source="{x:Static Application.Current}" Path="StateData.IsLoggedIn" Mode="TwoWay" />
+                        <Binding Source="{x:Static Application.Current}" Path="CurrentDataContext.ParamData.SoftwareEntities" Mode="TwoWay" />
+                      </MultiBinding>
+                    </ItemsControl.ItemsSource>
+                    <FrameworkElement.Resources>
+                      <ResourceDictionary>
+                        <DataTemplate x:Key="{DataTemplateKey {x:Type models:Entity}}" DataType="{x:Type models:Entity}">
+                          <TextBlock Text="{Binding ShortName}" />
+                        </DataTemplate>
+                      </ResourceDictionary>
+                    </FrameworkElement.Resources>
+                  </ComboBox>
+                </ControlTemplate>
+              </Setter.Value>
+            </Setter>
+          </DataTrigger>
+        </DataTemplate.Triggers>
+      </DataTemplate>
+      <DataTemplate x:Key="columnDelimiter">
+        <Control Name="delimiter" Focusable="False">
+          <Control.Template>
+            <ControlTemplate>
+              <TextBlock Text="{Binding Path=Delimiter}" ToolTip="{Binding Path=Delimiter}" />
+            </ControlTemplate>
+          </Control.Template>
+        </Control>
+        <DataTemplate.Triggers>
+          <DataTrigger Value="True" Binding="{Binding Path=IsEdited, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItemExtended}}}">
+            <Setter TargetName="delimiter" Property="Control.Template">
+              <Setter.Value>
+                <ControlTemplate>
+                  <TextBox Width="90" Text="{Binding UpdateSourceTrigger=PropertyChanged, Path=Delimiter}" />
+                </ControlTemplate>
+              </Setter.Value>
+            </Setter>
+          </DataTrigger>
+        </DataTemplate.Triggers>
+      </DataTemplate>
+      <DataTemplate x:Key="columnDate">
+        <Control Name="date" Focusable="False">
+          <Control.Template>
+            <ControlTemplate>
+              <TextBlock Text="{Binding Path=Date}" />
+            </ControlTemplate>
+          </Control.Template>
+        </Control>
+        <DataTemplate.Triggers>
+          <DataTrigger Value="True" Binding="{Binding Path=IsEdited, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItemExtended}}}">
+            <Setter TargetName="date" Property="Control.Template">
+              <Setter.Value>
+                <ControlTemplate>
+                  <TextBox Width="90" Text="{Binding UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, NotifyOnValidationError=True, Path=Date}" Validation.Error="InvalidType_Error" />
+                </ControlTemplate>
+              </Setter.Value>
+            </Setter>
+          </DataTrigger>
+        </DataTemplate.Triggers>
+      </DataTemplate>
+      <DataTemplate x:Key="columnDebit">
+        <Control Name="debit" Focusable="False">
+          <Control.Template>
+            <ControlTemplate>
+              <TextBlock Text="{Binding Path=Debit}" />
+            </ControlTemplate>
+          </Control.Template>
+        </Control>
+        <DataTemplate.Triggers>
+          <DataTrigger Value="True" Binding="{Binding Path=IsEdited, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItemExtended}}}">
+            <Setter TargetName="debit" Property="Control.Template">
+              <Setter.Value>
+                <ControlTemplate>
+                  <TextBox Width="90" Text="{Binding UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, NotifyOnValidationError=True, Path=Debit}" Validation.Error="InvalidType_Error" />
+                </ControlTemplate>
+              </Setter.Value>
+            </Setter>
+          </DataTrigger>
+        </DataTemplate.Triggers>
+      </DataTemplate>
+      <DataTemplate x:Key="columnCredit">
+        <Control Name="credit" Focusable="False">
+          <Control.Template>
+            <ControlTemplate>
+              <TextBlock Text="{Binding Path=Credit}" />
+            </ControlTemplate>
+          </Control.Template>
+        </Control>
+        <DataTemplate.Triggers>
+          <DataTrigger Value="True" Binding="{Binding Path=IsEdited, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItemExtended}}}">
+            <Setter TargetName="credit" Property="Control.Template">
+              <Setter.Value>
+                <ControlTemplate>
+                  <TextBox Width="90" Text="{Binding UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, NotifyOnValidationError=True, Path=Credit}" Validation.Error="InvalidType_Error" />
+                </ControlTemplate>
+              </Setter.Value>
+            </Setter>
+          </DataTrigger>
+        </DataTemplate.Triggers>
+      </DataTemplate>
+      <DataTemplate x:Key="columnDescription">
+        <Control Name="description" Focusable="False">
+          <Control.Template>
+            <ControlTemplate>
+              <TextBlock Text="{Binding Path=Description}" ToolTip="{Binding Path=Description}" />
+            </ControlTemplate>
+          </Control.Template>
+        </Control>
+        <DataTemplate.Triggers>
+          <DataTrigger Value="True" Binding="{Binding Path=IsEdited, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItemExtended}}}">
+            <Setter TargetName="description" Property="Control.Template">
+              <Setter.Value>
+                <ControlTemplate>
+                  <TextBox Width="150" Text="{Binding UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, NotifyOnValidationError=True, Path=Description}" Validation.Error="InvalidType_Error" />
+                </ControlTemplate>
+              </Setter.Value>
+            </Setter>
+          </DataTrigger>
+        </DataTemplate.Triggers>
+      </DataTemplate>
+      <DataTemplate x:Key="columnBalance">
+        <Control Name="balance" Focusable="False">
+          <Control.Template>
+            <ControlTemplate>
+              <TextBlock Text="{Binding Path=Balance}" />
+            </ControlTemplate>
+          </Control.Template>
+        </Control>
+        <DataTemplate.Triggers>
+          <DataTrigger Value="True" Binding="{Binding Path=IsEdited, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItemExtended}}}">
+            <Setter TargetName="balance" Property="Control.Template">
+              <Setter.Value>
+                <ControlTemplate>
+                  <TextBox Width="90" Text="{Binding UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, NotifyOnValidationError=True, Path=Balance}" Validation.Error="InvalidType_Error" />
+                </ControlTemplate>
+              </Setter.Value>
+            </Setter>
+          </DataTrigger>
+        </DataTemplate.Triggers>
+      </DataTemplate>
+    </ResourceDictionary>
+  </FrameworkElement.Resources>
+  <StackPanel Style="{StaticResource entityGridStackPanel}">
+    <ListViewExtended Name="LVParametrization_SoftwareMovementParam" MaxHeight="470" ItemContainerStyle="{StaticResource itemStyle}" ItemsSource="{Binding}" CommandAddItem="{Binding Source={StaticResource viewModelSWMovementParam}, Path=CMDAddItem}" CommandEditItem="{Binding Source={StaticResource viewModelSWMovementParam}, Path=CMDEditItem}" CommandRemoveItem="{Binding Source={StaticResource viewModelSWMovementParam}, Path=CMDRemoveItem}" CommandConfirm="{Binding Source={StaticResource viewModelSWMovementParam}, Path=CMDConfirm}" CommandCancel="{Binding Source={StaticResource viewModelSWMovementParam}, Path=CMDCancel}">
+      <ListView.View>
+        <GridView ColumnHeaderTemplate="{StaticResource headerTemplateTransparent}" ColumnHeaderContainerStyle="{StaticResource gridViewHeaderStyle}">
+          <GridViewColumnExtended Width="280" CellTemplate="{StaticResource columnEntity}" SortPropertyName="Entity.ShortName" IsDefaultSortColumn="True" Header="{Resx ResxName=ReCross.FE.Views.SWMovementParamViewGrid, Key=L_Entity}" />
+          <GridViewColumnExtended Width="100" CellTemplate="{StaticResource columnDate}" SortPropertyName="Date" Header="{Resx ResxName=ReCross.FE.Views.SWMovementParamViewGrid, Key=L_Date}" />
+          <GridViewColumnExtended Width="100" CellTemplate="{StaticResource columnDebit}" SortPropertyName="Debit" Header="{Resx ResxName=ReCross.FE.Views.SWMovementParamViewGrid, Key=L_Debit}" />
+          <GridViewColumnExtended Width="100" CellTemplate="{StaticResource columnCredit}" SortPropertyName="Credit" Header="{Resx ResxName=ReCross.FE.Views.SWMovementParamViewGrid, Key=L_Credit}" />
+          <GridViewColumnExtended Width="160" CellTemplate="{StaticResource columnDescription}" SortPropertyName="Description" Header="{Resx ResxName=ReCross.FE.Views.SWMovementParamViewGrid, Key=L_Description}" />
+          <GridViewColumnExtended Width="100" CellTemplate="{StaticResource columnBalance}" SortPropertyName="Balance" Header="{Resx ResxName=ReCross.FE.Views.SWMovementParamViewGrid, Key=L_Balance}" />
+          <GridViewColumn HeaderTemplate="{StaticResource operationsEditableGridViewHeader}" CellTemplate="{StaticResource operationsEditableGridViewCell}" />
+        </GridView>
+      </ListView.View>
+    </ListViewExtended>
+  </StackPanel>
+</strillsUIUserControls:UserControlGridBase>

@@ -1,0 +1,7 @@
+C:\Projetos\Reconcilia\ReCross.FE-Fonte\Strills.WPF.Reports.dll\obj\Debug\net40\Strills.WPF.Reports.csproj.AssemblyReference.cache
+C:\Projetos\Reconcilia\ReCross.FE-Fonte\Strills.WPF.Reports.dll\obj\Debug\net40\Strills.WPF.Reports.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projetos\Reconcilia\ReCross.FE-Fonte\Strills.WPF.Reports.dll\obj\Debug\net40\Strills.WPF.Reports.csproj.CoreCompileInputs.cache
+C:\Projetos\Reconcilia\ReCross.FE-Fonte\Strills.WPF.Reports.dll\bin\Debug\net40\Strills.WPF.Reports.dll
+C:\Projetos\Reconcilia\ReCross.FE-Fonte\Strills.WPF.Reports.dll\bin\Debug\net40\Strills.WPF.Reports.pdb
+C:\Projetos\Reconcilia\ReCross.FE-Fonte\Strills.WPF.Reports.dll\obj\Debug\net40\Strills.WPF.Reports.dll
+C:\Projetos\Reconcilia\ReCross.FE-Fonte\Strills.WPF.Reports.dll\obj\Debug\net40\Strills.WPF.Reports.pdb

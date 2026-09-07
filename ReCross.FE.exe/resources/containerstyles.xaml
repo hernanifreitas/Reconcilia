@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:converters="clr-namespace:ReCross.FE.Converters">
+  <Style x:Key="focusStyle" TargetType="{x:Type Control}">
+    <Setter Property="Template" Value="{x:Null}" />
+  </Style>
+  <LinearGradientBrush x:Key="entityViewBorderBackGround" EndPoint="0.5,1" StartPoint="0.5,0" Opacity="0.2">
+    <GradientStop Color="White" />
+    <GradientStop Color="AntiqueWhite" Offset="0.26499998569488525" />
+  </LinearGradientBrush>
+  <Style x:Key="entityViewBorder" TargetType="{x:Type Border}">
+    <Setter Property="Border.CornerRadius" Value="10,0,10,0" />
+    <Setter Property="BorderBrush" Value="#00FFFFFF" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="Background" Value="{StaticResource entityViewBorderBackGround}" />
+  </Style>
+  <TranslateTransform x:Key="itemListStackPanelTransform" X="-2500" />
+  <TranslateTransform x:Key="itemStackPanelTransform" X="-2500" Y="-520" />
+  <Style x:Key="itemListStackPanel" TargetType="{x:Type StackPanel}">
+    <Setter Property="MaxWidth" Value="980" />
+    <Setter Property="MaxHeight" Value="520" />
+    <Setter Property="MinWidth" Value="980" />
+    <Setter Property="MinHeight" Value="520" />
+    <Setter Property="RenderTransform" Value="{StaticResource itemListStackPanelTransform}" />
+  </Style>
+  <Style x:Key="itemStackPanel" TargetType="{x:Type StackPanel}">
+    <Setter Property="MaxWidth" Value="980" />
+    <Setter Property="MaxHeight" Value="520" />
+    <Setter Property="MinWidth" Value="980" />
+    <Setter Property="MinHeight" Value="520" />
+    <Setter Property="RenderTransform" Value="{StaticResource itemStackPanelTransform}" />
+  </Style>
+  <Style x:Key="itemListWrapPanel" TargetType="{x:Type WrapPanel}">
+    <Setter Property="WrapPanel.Orientation" Value="Horizontal" />
+    <Setter Property="Margin" Value="10" />
+    <Setter Property="Height" Value="500" />
+    <Setter Property="Width" Value="960" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+  </Style>
+  <Style x:Key="entityFormWrapPanel" TargetType="{x:Type WrapPanel}">
+    <Setter Property="WrapPanel.Orientation" Value="Horizontal" />
+    <Setter Property="Margin" Value="10" />
+    <Setter Property="Height" Value="460" />
+    <Setter Property="Width" Value="940" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+  </Style>
+  <Style x:Key="entityGridStackPanel" TargetType="{x:Type StackPanel}">
+    <Setter Property="Width" Value="960" />
+    <Setter Property="VerticalAlignment" Value="Stretch" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+  </Style>
+  <Style x:Key="formButtonsStackPanel" TargetType="{x:Type StackPanel}">
+    <Setter Property="Margin" Value="0,0,0,10" />
+    <Setter Property="StackPanel.Orientation" Value="Horizontal" />
+    <Setter Property="VerticalAlignment" Value="Top" />
+    <Setter Property="HorizontalAlignment" Value="Right" />
+    <Setter Property="Visibility" Value="{Binding Source={x:Static Application.Current}, Path=StateData.IsNotEditingMode, UpdateSourceTrigger=PropertyChanged, Converter={x:Static converters:VisibilityAsDataConverter.Instance}}" />
+  </Style>
+  <Style x:Key="formNavigationStackPanel" TargetType="{x:Type StackPanel}">
+    <Setter Property="Margin" Value="10,0,0,0" />
+    <Setter Property="StackPanel.Orientation" Value="Horizontal" />
+    <Setter Property="VerticalAlignment" Value="Top" />
+    <Setter Property="HorizontalAlignment" Value="Left" />
+    <Setter Property="Visibility" Value="{Binding Source={x:Static Application.Current}, Path=StateData.IsEditingMode, UpdateSourceTrigger=PropertyChanged, Converter={x:Static converters:VisibilityAsDataConverter.Instance}}" />
+  </Style>
+  <Style x:Key="ScrollBarLineButton" TargetType="{x:Type RepeatButton}">
+    <Setter Property="UIElement.SnapsToDevicePixels" Value="True" />
+    <Setter Property="FrameworkElement.OverridesDefaultStyle" Value="True" />
+    <Setter Property="Focusable" Value="False" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type RepeatButton}">
+          <Border Name="Border" Margin="0" CornerRadius="5,0,5,0" Background="#FFF0F8FF" BorderThickness="1" BorderBrush="{x:Null}">
+            <Path HorizontalAlignment="Center" VerticalAlignment="Center" Fill="#FF000080" Data="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}}" />
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsPressed" Value="True">
+              <Setter TargetName="Border" Property="Border.Background" Value="#526478" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+              <Setter TargetName="Border" Property="Border.Background" Value="#CCCCCC" />
+            </Trigger>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="Border" Property="Border.Background" Value="#c5d7e5" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="ScrollBarPageButton" TargetType="{x:Type RepeatButton}">
+    <Setter Property="UIElement.SnapsToDevicePixels" Value="True" />
+    <Setter Property="FrameworkElement.OverridesDefaultStyle" Value="True" />
+    <Setter Property="IsTabStop" Value="False" />
+    <Setter Property="Focusable" Value="False" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type RepeatButton}">
+          <Border Background="#00FFFFFF" />
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="ScrollBarThumb" TargetType="{x:Type Thumb}">
+    <Setter Property="UIElement.SnapsToDevicePixels" Value="True" />
+    <Setter Property="FrameworkElement.OverridesDefaultStyle" Value="True" />
+    <Setter Property="IsTabStop" Value="False" />
+    <Setter Property="Focusable" Value="False" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Thumb}">
+          <Border CornerRadius="10,0,10,0" Background="#FFF0F8FF" />
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <ControlTemplate x:Key="VerticalScrollBar" TargetType="{x:Type ScrollBar}">
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Width="20" Cursor="Hand">
+      <Grid.RowDefinitions>
+        <RowDefinition MaxHeight="18" Height="0.409*" />
+        <RowDefinition Height="0.182*" />
+        <RowDefinition MaxHeight="18" Height="0.409*" />
+      </Grid.RowDefinitions>
+      <Border Grid.RowSpan="3" CornerRadius="2" Background="#FF3B3B3B" Margin="15,22,15,22" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+      <RepeatButton Grid.Row="0" Height="18" Command="ScrollBar.LineUpCommand" Content="M 0 4 L 8 4 L 4 0 Z" Style="{StaticResource ScrollBarLineButton}" />
+      <Track Name="PART_Track" Grid.Row="1" IsDirectionReversed="True">
+        <Track.DecreaseRepeatButton>
+          <RepeatButton Command="ScrollBar.PageUpCommand" Style="{StaticResource ScrollBarPageButton}" />
+        </Track.DecreaseRepeatButton>
+        <Track.Thumb>
+          <Thumb Background="#FFF0F8FF" Height="Auto" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="18" Style="{StaticResource ScrollBarThumb}" />
+        </Track.Thumb>
+        <Track.IncreaseRepeatButton>
+          <RepeatButton Command="ScrollBar.PageDownCommand" Style="{StaticResource ScrollBarPageButton}" />
+        </Track.IncreaseRepeatButton>
+      </Track>
+      <RepeatButton Grid.Row="3" Height="18" Command="ScrollBar.LineDownCommand" Content="M 0 0 L 4 4 L 8 0 Z" Style="{StaticResource ScrollBarLineButton}" />
+    </Grid>
+  </ControlTemplate>
+  <ControlTemplate x:Key="HorizontalScrollBar" TargetType="{x:Type ScrollBar}">
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition MaxWidth="18" />
+        <ColumnDefinition Width="0.00001*" />
+        <ColumnDefinition MaxWidth="18" />
+      </Grid.ColumnDefinitions>
+      <Border Grid.ColumnSpan="3" CornerRadius="2" Background="#FF3B3B3B" Margin="22,15,22,15" />
+      <RepeatButton Grid.Column="0" Width="18" Command="ScrollBar.LineLeftCommand" Content="M 4 0 L 4 8 L 0 4 Z" Margin="0,10,0,10" Style="{StaticResource ScrollBarLineButton}" />
+      <Track Name="PART_Track" Grid.Column="1" IsDirectionReversed="False">
+        <Track.DecreaseRepeatButton>
+          <RepeatButton Command="ScrollBar.PageLeftCommand" Style="{StaticResource ScrollBarPageButton}" />
+        </Track.DecreaseRepeatButton>
+        <Track.Thumb>
+          <Thumb Margin="0,10,0,10" Background="#C0C0C0" BorderBrush="#404040" Height="8" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Style="{StaticResource ScrollBarThumb}" />
+        </Track.Thumb>
+        <Track.IncreaseRepeatButton>
+          <RepeatButton Command="ScrollBar.PageRightCommand" Style="{StaticResource ScrollBarPageButton}" />
+        </Track.IncreaseRepeatButton>
+      </Track>
+      <RepeatButton Grid.Column="3" Width="18" Command="ScrollBar.LineRightCommand" Content="M 0 0 L 4 4 L 0 8 Z" Margin="0,10,0,10" Style="{StaticResource ScrollBarLineButton}" />
+    </Grid>
+  </ControlTemplate>
+  <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
+    <Setter Property="UIElement.SnapsToDevicePixels" Value="True" />
+    <Setter Property="FrameworkElement.OverridesDefaultStyle" Value="True" />
+    <Style.Triggers>
+      <Trigger Property="ScrollBar.Orientation" Value="Horizontal">
+        <Setter Property="Width" Value="Auto" />
+        <Setter Property="Height" Value="Auto" />
+        <Setter Property="Template" Value="{StaticResource HorizontalScrollBar}" />
+      </Trigger>
+      <Trigger Property="ScrollBar.Orientation" Value="Vertical">
+        <Setter Property="Width" Value="Auto" />
+        <Setter Property="Height" Value="Auto" />
+        <Setter Property="Template" Value="{StaticResource VerticalScrollBar}" />
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+</ResourceDictionary>

@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Window x:Class="ReCross.FE.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:strillsUIControls="clr-namespace:FluidKit.Controls;assembly=FluidKit" xmlns:converters="clr-namespace:ReCross.FE.Converters" xmlns:views="clr-namespace:ReCross.FE.Views" xmlns:models="clr-namespace:ReCross.BE.DataObjects;assembly=ReCross.BE" xmlns:Utils="clr-namespace:ReCross.FE" xmlns:strillsControls="clr-namespace:Strills.WPF.UI.Controls;assembly=Strills.WPF.UI" WindowStartupLocation="CenterScreen" Width="1024" Height="730" Icon="pack://application:,,,/ReCross.FE;component/Images/Reconcilia.ico" Title="{Resx ResxName=ReCross.FE.MainWindow, Key=Application.Title}">
+  <FrameworkElement.Resources>
+    <ResourceDictionary>
+      <Style x:Key="logButton" TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="25" />
+        <Setter Property="Height" Value="25" />
+        <Setter Property="BorderBrush" Value="#00FFFFFF" />
+      </Style>
+      <Style x:Key="langButton" TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="25" />
+        <Setter Property="Height" Value="25" />
+        <Setter Property="BorderBrush" Value="#00FFFFFF" />
+        <Setter Property="Margin" Value="10,0,0,0" />
+        <Setter Property="Background">
+          <Setter.Value>
+            <ImageBrush ImageSource="Images\Language_PT.png" />
+          </Setter.Value>
+        </Setter>
+      </Style>
+      <Utils:MenuItemDataCollection x:Key="menuItemDataSource" />
+      <LinearGradientBrush x:Key="ReflectionBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0" Color="#7F000000" />
+        <GradientStop Offset=".5" Color="Transparent" />
+      </LinearGradientBrush>
+      <DataTemplate x:Key="MenuItemTemplate_Reflection">
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*" />
+            <RowDefinition Height="0.5*" />
+          </Grid.RowDefinitions>
+          <Border Name="ElementVisual" CornerRadius="15,0,15,0" BorderThickness="4" BorderBrush="#FFF0F8FF" Background="#FFF0F8FF" Padding="2">
+            <StackPanel Orientation="Vertical">
+              <TextBlock FontSize="20" TextAlignment="Center" Background="#FFF0F8FF" Foreground="#526478" Padding="2,0,2,2" FontFamily="Impact" Text="{Binding Path=Title}" />
+              <Image Stretch="Fill" Source="{Binding Path=ImageURL}" />
+            </StackPanel>
+          </Border>
+          <Rectangle Grid.Row="1" OpacityMask="{StaticResource ReflectionBrush}" Height="{Binding ActualHeight, ElementName=ElementVisual}">
+            <Shape.Fill>
+              <VisualBrush Visual="{Binding ElementName=ElementVisual}">
+                <Brush.RelativeTransform>
+                  <ScaleTransform ScaleX="1" ScaleY="-1" CenterX="0.5" CenterY="0.5" />
+                </Brush.RelativeTransform>
+              </VisualBrush>
+            </Shape.Fill>
+          </Rectangle>
+        </Grid>
+      </DataTemplate>
+    </ResourceDictionary>
+  </FrameworkElement.Resources>
+  <Control.Background>
+    <ImageBrush ImageSource="Images\BackGround.png" Stretch="UniformToFill" />
+  </Control.Background>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="180" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <strillsUIControls:ElementFlow Name="EFMenu" Grid.Row="0" Grid.Column="0" ItemsSource="{DynamicResource menuItemDataSource}" ItemTemplate="{DynamicResource MenuItemTemplate_Reflection}" TiltAngle="45" ItemGap="0.65" FrontItemGap="0" PopoutDistance="0.5" FocusVisualStyle="{StaticResource focusStyle}" Cursor="Hand" ElementWidth="200" ElementHeight="250" SelectedIndex="0">
+      <strillsUIControls:ElementFlow.Layout>
+        <strillsUIControls:CoverFlow />
+      </strillsUIControls:ElementFlow.Layout>
+      <strillsUIControls:ElementFlow.Camera>
+        <PerspectiveCamera FieldOfView="60" Position="0,0.2,4" LookDirection="0,0,-1" />
+      </strillsUIControls:ElementFlow.Camera>
+    </strillsUIControls:ElementFlow>
+    <ContentPresenter Name="CPBusinessTool" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,150,0,0" Grid.Row="0" Grid.Column="0">
+      <ContentPresenter.Content>
+        <StackPanel Orientation="Horizontal" DataContext="{Binding Source={x:Static Application.Current}}">
+          <strillsControls:AutoFilteredComboBox Name="CBCustomers" Margin="0" Width="180" FontSize="14" Height="25" SearchTextPath="ShortName" TextSearch.TextPath="ShortName" FontWeight="Bold" HorizontalContentAlignment="Center" HorizontalAlignment="Center" SelectedItem="{Binding Path=CurrentDataContext.DataFilters.CurrentEntity, Mode=TwoWay}" IsEnabled="{Binding Source={x:Static Application.Current}, Path=StateData.IsNotEditingMode, UpdateSourceTrigger=PropertyChanged}" ToolTip="{Resx ResxName=ReCross.FE.Views.MovementFilterView, Key=L_Entity}">
+            <Control.Background>
+              <SolidColorBrush Color="White" Opacity="0.4" />
+            </Control.Background>
+            <ItemsControl.ItemsSource>
+              <MultiBinding Converter="{x:Static converters:ComboBoxItemsConverter.Instance}" ConverterParameter="Customers">
+                <Binding Source="{x:Static Application.Current}" Path="StateData.IsLoggedIn" Mode="TwoWay" />
+                <Binding Source="{x:Static Application.Current}" Path="CurrentDataContext.ParamData.Customers" Mode="TwoWay" />
+              </MultiBinding>
+            </ItemsControl.ItemsSource>
+            <FrameworkElement.Resources>
+              <ResourceDictionary>
+                <DataTemplate x:Key="{DataTemplateKey {x:Type models:Entity}}" DataType="{x:Type models:Entity}">
+                  <TextBlock TextAlignment="Center" Text="{Binding ShortName}" ToolTip="{Binding FullName}" />
+                </DataTemplate>
+              </ResourceDictionary>
+            </FrameworkElement.Resources>
+          </strillsControls:AutoFilteredComboBox>
+        </StackPanel>
+      </ContentPresenter.Content>
+    </ContentPresenter>
+    <ContentPresenter Name="CPCompany" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10" Grid.Row="0" Grid.Column="1">
+      <ContentPresenter.Content>
+        <DockPanel>
+          <TextBlock Name="LCompanyName" Text="(Gabinete)" Margin="5,5" Foreground="#FF000000" FontWeight="Bold" Typography.Capitals="AllSmallCaps" />
+        </DockPanel>
+      </ContentPresenter.Content>
+    </ContentPresenter>
+    <ContentPresenter Name="CPLoading" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10" Grid.Row="0" Grid.Column="1">
+      <ContentPresenter.Content>
+        <DockPanel>
+          <TextBlock Name="LLoading" Text="A importar movimentos. Por favor aguarde..." Margin="0,140,0,-10" Foreground="#526478" FontWeight="Bold" FontSize="18" Typography.Capitals="AllSmallCaps" Visibility="{Binding Source={x:Static Application.Current}, Path=StateData.IsLoading, UpdateSourceTrigger=PropertyChanged, Converter={x:Static converters:VisibilityAsDataConverter.Instance}, ConverterParameter=Visible}" />
+        </DockPanel>
+      </ContentPresenter.Content>
+    </ContentPresenter>
+    <ContentPresenter Name="CPLogTool" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10" Grid.Row="0" Grid.Column="2">
+      <ContentPresenter.Content>
+        <DockPanel>
+          <TextBlock Name="LUserFullName" Text="First Last" Margin="5,5" Foreground="#FF000000" FontWeight="Bold" Typography.Capitals="AllSmallCaps" />
+          <Button Name="BLogOut" Style="{StaticResource logButton}" ToolTip="{Resx ResxName=ReCross.FE.MainWindow, Key=B_LogOut}" Click="BLogOut_Click">
+            <Control.Background>
+              <ImageBrush ImageSource="Images\LogOut.png" />
+            </Control.Background>
+          </Button>
+          <Button Name="BChangeLanguage" Style="{StaticResource langButton}" ToolTip="PT" Click="BChangeLanguage_Click" />
+          <Button Name="BConfiguration" Style="{StaticResource logButton}" ToolTip="{Resx ResxName=ReCross.FE.MainWindow, Key=B_Configuration}" Click="BConfiguration_Click">
+            <Control.Background>
+              <ImageBrush ImageSource="Images\Configuration.png" />
+            </Control.Background>
+          </Button>
+          <Button Name="BChangePassword" Style="{StaticResource logButton}" ToolTip="{Resx ResxName=ReCross.FE.MainWindow, Key=B_ChangePassword}" Click="BChangePassword_Click">
+            <Control.Background>
+              <ImageBrush ImageSource="Images\Password.png" />
+            </Control.Background>
+          </Button>
+          <Button Name="BAbout" Style="{StaticResource logButton}" ToolTip="{Resx ResxName=ReCross.FE.MainWindow, Key=B_About}" Click="BAbout_Click">
+            <Control.Background>
+              <ImageBrush ImageSource="Images\About.png" />
+            </Control.Background>
+          </Button>
+        </DockPanel>
+      </ContentPresenter.Content>
+    </ContentPresenter>
+    <StackPanel Name="SPContent" Grid.Row="1" />
+    <StackPanel Grid.Row="2" Height="Auto">
+      <TextBlock Text="" />
+    </StackPanel>
+  </Grid>
+</Window>

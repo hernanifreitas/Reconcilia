@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<strillsUIUserControls:UserControlFormBase x:Class="ReCross.FE.Views.AppConfigurationView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:properties="clr-namespace:ReCross.FE.Properties" xmlns:models="clr-namespace:ReCross.BE.DataObjects;assembly=ReCross.BE" xmlns:viewModels="clr-namespace:ReCross.FE.ViewModels" xmlns:strillsUIUserControls="clr-namespace:Strills.WPF.UI.UserControls;assembly=Strills.WPF.UI" xmlns:strillsUIControlAdapters="clr-namespace:Strills.WPF.UI.Controls.Internal;assembly=Strills.WPF.UI" xmlns:strillsUICommands="clr-namespace:Strills.WPF.UI.Commands;assembly=Strills.WPF.UI" Height="Auto" Width="Auto" xmlns:views="clr-namespace:ReCross.FE.Views" Loaded="UserControl_Loaded">
+  <FrameworkElement.Resources>
+    <ResourceDictionary>
+      <properties:Settings x:Key="settings" />
+    </ResourceDictionary>
+  </FrameworkElement.Resources>
+  <StackPanel Name="SPItem" MaxWidth="650" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Center" DataContext="{Binding Source={StaticResource settings}, Path=Default}">
+    <Border Style="{StaticResource entityViewBorder}">
+      <WrapPanel Orientation="Horizontal" Margin="10" Height="Auto" Width="620" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+        <StackPanel Width="620" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,0,0,20">
+          <TextBlock Style="{StaticResource titleTextBlock}" Text="{Resx ResxName=ReCross.FE.Views.AppConfigurationView, Key=L_AppConfiguration}" />
+        </StackPanel>
+        <StackPanel Width="250" VerticalAlignment="Center" Height="35">
+          <TextBlock Name="LConfigFile" Style="{StaticResource rightTextBlock}" Text="{Resx ResxName=ReCross.FE.Views.AppConfigurationView, Key=L_ConfigFile}" />
+        </StackPanel>
+        <StackPanel Width="370" VerticalAlignment="Center" Height="45" Orientation="Horizontal">
+          <TextBox Name="TBConfigFile" Height="25" VerticalAlignment="Top" Width="250" IsEnabled="True" Text="{Binding UpdateSourceTrigger=PropertyChanged, Path=ConfigFile, Mode=TwoWay}" TextChanged="TBConfigFile_TextChanged" />
+          <CheckBox Name="CBUseConfigFile" Margin="5,0,5,5" VerticalAlignment="Center" IsEnabled="False" IsChecked="{Binding UpdateSourceTrigger=PropertyChanged, Path=UseConfigFile, Mode=TwoWay}" Content="{Resx ResxName=ReCross.FE.Views.AppConfigurationView, Key=L_UseConfigFile}" Checked="CBUseConfigFile_Checked" Unchecked="CBUseConfigFile_Unchecked" />
+        </StackPanel>
+        <StackPanel Width="250" VerticalAlignment="Center" Height="35">
+          <TextBlock Name="LDataSource" Style="{StaticResource rightTextBlock}" Text="{Resx ResxName=ReCross.FE.Views.AppConfigurationView, Key=L_DataSource}" />
+        </StackPanel>
+        <StackPanel Width="370" VerticalAlignment="Center" Height="45">
+          <TextBox Name="TBDataSource" Width="250" IsEnabled="True" Text="{Binding UpdateSourceTrigger=PropertyChanged, Path=DataSource, Mode=TwoWay}" />
+        </StackPanel>
+        <StackPanel Width="250" VerticalAlignment="Center" Height="35">
+          <TextBlock Name="LUsername" Style="{StaticResource rightTextBlock}" Text="{Resx ResxName=ReCross.FE.Views.AppConfigurationView, Key=L_Username}" />
+        </StackPanel>
+        <StackPanel Width="370" VerticalAlignment="Center" Height="45" Orientation="Horizontal">
+          <TextBox Name="TBUsername" VerticalAlignment="Top" Height="25" Width="164" IsEnabled="True" Text="{Binding UpdateSourceTrigger=PropertyChanged, Path=Username, Mode=TwoWay}" />
+          <TextBlock Margin="5,0,5,5" Text=" / " VerticalAlignment="Center" />
+          <PasswordBox Name="PBPassword" VerticalAlignment="Top" Height="25" Width="164" strillsUIControlAdapters:PasswordBoxAssistant.BindPassword="True" IsEnabled="True" strillsUIControlAdapters:PasswordBoxAssistant.BoundPassword="{Binding Path=Password, Mode=TwoWay}" Validation.Error="InvalidType_Error" />
+        </StackPanel>
+        <StackPanel Width="250" VerticalAlignment="Center" Height="35">
+          <TextBlock Name="LRecDocPath" Style="{StaticResource rightTextBlock}" Height="20" Text="{Resx ResxName=ReCross.FE.Views.AppConfigurationView, Key=L_RecDocPath}" />
+        </StackPanel>
+        <StackPanel Width="370" VerticalAlignment="Center" Height="45">
+          <TextBox Name="TBRecDocPath" Width="350" IsEnabled="True" Text="{Binding UpdateSourceTrigger=PropertyChanged, Path=RecDocPath, Mode=TwoWay}" />
+        </StackPanel>
+        <StackPanel Width="250" VerticalAlignment="Center" Height="35">
+          <TextBlock Name="LCompanyName" Style="{StaticResource rightTextBlock}" Height="20" Text="{Resx ResxName=ReCross.FE.Views.AppConfigurationView, Key=L_CompanyName}" />
+        </StackPanel>
+        <StackPanel Width="370" VerticalAlignment="Center" Height="45">
+          <TextBox Name="TBCompanyName" Width="350" IsEnabled="True" Text="{Binding UpdateSourceTrigger=PropertyChanged, Path=CompanyName, Mode=TwoWay}" />
+        </StackPanel>
+        <StackPanel Width="250" VerticalAlignment="Center" Height="35">
+          <TextBlock Name="LCompanyFiscalNumber" Style="{StaticResource rightTextBlock}" Height="20" Text="{Resx ResxName=ReCross.FE.Views.AppConfigurationView, Key=L_CompanyFiscalNumber}" />
+        </StackPanel>
+        <StackPanel Width="370" VerticalAlignment="Center" Height="45">
+          <TextBox Name="TBCompanyFiscalNumber" Width="350" IsEnabled="True" Text="{Binding UpdateSourceTrigger=PropertyChanged, Path=CompanyFiscalNumber, Mode=TwoWay}" />
+        </StackPanel>
+        <StackPanel Width="250" VerticalAlignment="Center" Height="35">
+          <TextBlock Name="LCompanyLogo" Style="{StaticResource rightTextBlock}" Height="20" Text="{Resx ResxName=ReCross.FE.Views.AppConfigurationView, Key=L_CompanyLogo}" />
+        </StackPanel>
+        <StackPanel Width="370" VerticalAlignment="Center" Height="45">
+          <TextBox Name="TBCompanyLogo" Width="350" IsEnabled="True" Text="{Binding UpdateSourceTrigger=PropertyChanged, Path=CompanyLogo, Mode=TwoWay}" />
+        </StackPanel>
+        <StackPanel Width="250" VerticalAlignment="Center" Height="35">
+          <TextBlock Name="LAutoLinkEnabled" Style="{StaticResource rightTextBlock}" Height="20" Text="{Resx ResxName=ReCross.FE.Views.AppConfigurationView, Key=L_AutoLinkEnabled}" />
+        </StackPanel>
+        <StackPanel Width="370" VerticalAlignment="Center" Height="45">
+          <CheckBox Name="CBAutoLinkEnabled" IsEnabled="True" IsChecked="{Binding UpdateSourceTrigger=PropertyChanged, Path=AutoLinkEnabled, Mode=TwoWay}" />
+        </StackPanel>
+        <StackPanel Margin="0,10,0,10" Width="310" VerticalAlignment="Bottom">
+          <TextBlock Name="LDataBase" Style="{StaticResource rightTextBlock}" Height="20" Text="{Resx ResxName=ReCross.FE.Views.AppConfigurationView, Key=L_DataBase}" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0,10,0,10" Width="310" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+          <Button Name="BBackup" Style="{StaticResource formButton}" Margin="10,0,5,0" Width="120" Command="{Binding Source={StaticResource viewModelAppConfiguration}, Path=CMDBackup}" Content="{Resx ResxName=ReCross.FE.Views.AppConfigurationView, Key=B_Backup}" />
+          <Button Name="BRestore" Style="{StaticResource formButton}" Margin="5,0,0,0" Width="120" Command="{Binding Source={StaticResource viewModelAppConfiguration}, Path=CMDRestore}" Content="{Resx ResxName=ReCross.FE.Views.AppConfigurationView, Key=B_Restore}" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Width="620" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+          <Button Name="BUpdate" Style="{StaticResource formButton}" Margin="190,0,5,0" Width="120" Command="{Binding Source={StaticResource viewModelAppConfiguration}, Path=CMDUpdate}" Content="{Resx ResxName=ReCross.FE.Views.AppConfigurationView, Key=B_Update}" />
+          <Button Name="BCancel" Style="{StaticResource formButton}" Margin="5,0,0,0" Width="120" Command="{Binding Source={StaticResource viewModelAppConfiguration}, Path=CMDCancel}" Content="{Resx ResxName=ReCross.FE.Views.AppConfigurationView, Key=B_Cancel}" />
+        </StackPanel>
+      </WrapPanel>
+    </Border>
+  </StackPanel>
+</strillsUIUserControls:UserControlFormBase>

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserControl x:Class="ReCross.FE.Views.BankMovViewGrid" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:strillsConverters="clr-namespace:Strills.WPF.Localization.Converters;assembly=Strills.WPF.Localization" xmlns:strillsUIUserControls="clr-namespace:Strills.WPF.UI.UserControls;assembly=Strills.WPF.UI" xmlns:strillsUICommands="clr-namespace:Strills.WPF.UI.Commands;assembly=Strills.WPF.UI" xmlns:viewModels="clr-namespace:ReCross.FE.ViewModels" Height="Auto" Width="Auto" xmlns:views="clr-namespace:ReCross.FE.Views" DataContext="{Binding Path=BankMovementList}" Loaded="UserControl_Loaded">
+  <FrameworkElement.Resources>
+    <ResourceDictionary>
+      <Style x:Key="bankMovGridStackPanel" TargetType="{x:Type StackPanel}">
+        <Setter Property="Width" Value="450" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+      </Style>
+    </ResourceDictionary>
+  </FrameworkElement.Resources>
+  <StackPanel Style="{StaticResource bankMovGridStackPanel}">
+    <ListViewExtended Name="LVBankMovs" MaxHeight="345" SelectedIndex="-1" ItemContainerStyle="{StaticResource itemStyle}" ItemsSource="{Binding}" SelectedItem="{x:Null}">
+      <ListView.View>
+        <GridView ColumnHeaderTemplate="{StaticResource headerTemplateTransparent}" ColumnHeaderContainerStyle="{StaticResource gridViewHeaderStyle}">
+          <GridViewColumnExtended Width="42" CellTemplate="{StaticResource cellCheck}" />
+          <GridViewColumnExtended Width="123" SortPropertyName="Amount" CellTemplate="{StaticResource cellAmount}" Header="{Resx ResxName=ReCross.FE.Views.BankMovViewGrid, Key=L_Amount}" />
+          <GridViewColumnExtended Width="85" SortPropertyName="TransactionDate" Header="{Resx ResxName=ReCross.FE.Views.BankMovViewGrid, Key=L_TransactionDate}" DisplayMemberBinding="{Binding Path=TransactionDate, Converter={x:Static strillsConverters:DateConverter.Instance}}" />
+          <GridViewColumnExtended Width="180" SortPropertyName="Description" CellTemplate="{StaticResource cellDescription}" Header="{Resx ResxName=ReCross.FE.Views.BankMovViewGrid, Key=L_Description}" />
+        </GridView>
+      </ListView.View>
+    </ListViewExtended>
+  </StackPanel>
+</UserControl>

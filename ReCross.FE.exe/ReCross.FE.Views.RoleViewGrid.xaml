@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<strillsUIUserControls:UserControlGridBase x:Class="ReCross.FE.Views.RoleViewGrid" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:models="clr-namespace:ReCross.BE.DataObjects;assembly=ReCross.BE" xmlns:viewModels="clr-namespace:ReCross.FE.ViewModels" xmlns:strillsDataObjects="clr-namespace:Strills.WPF.Data.Objects;assembly=Strills.WPF.Data" xmlns:strillsUIUserControls="clr-namespace:Strills.WPF.UI.UserControls;assembly=Strills.WPF.UI" xmlns:strillsUICommands="clr-namespace:Strills.WPF.UI.Commands;assembly=Strills.WPF.UI" Height="Auto" Width="Auto" xmlns:views="clr-namespace:ReCross.FE.Views" Loaded="UserControl_Loaded">
+  <FrameworkElement.Resources>
+    <ResourceDictionary>
+      <DataTemplate x:Key="columnFunctionality">
+        <Control Name="functionality" Focusable="False">
+          <Control.Template>
+            <ControlTemplate>
+              <StackPanel>
+                <TextBlock TextAlignment="Center" Text="{Binding Path=Functionality.Abbreviation}" ToolTip="{Binding Path=Functionality.Description}" />
+              </StackPanel>
+            </ControlTemplate>
+          </Control.Template>
+        </Control>
+        <DataTemplate.Triggers>
+          <DataTrigger Value="True" Binding="{Binding Path=IsEdited, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItemExtended}}}">
+            <Setter TargetName="functionality" Property="Control.Template">
+              <Setter.Value>
+                <ControlTemplate>
+                  <ComboBox Name="CBFunctionality" Width="190" Height="25" SelectedItem="{Binding ValidatesOnDataErrors=True, ValidatesOnExceptions=True, NotifyOnValidationError=True, Path=Functionality}" ItemsSource="{Binding Path=FunctionalityList.Source, Source={StaticResource viewModelRole}}" Validation.Error="InvalidType_Error">
+                    <FrameworkElement.Resources>
+                      <ResourceDictionary>
+                        <DataTemplate x:Key="{DataTemplateKey {x:Type models:Functionality}}" DataType="{x:Type models:Functionality}">
+                          <TextBlock Text="{Binding Abbreviation}" ToolTip="{Binding Description}" />
+                        </DataTemplate>
+                      </ResourceDictionary>
+                    </FrameworkElement.Resources>
+                  </ComboBox>
+                </ControlTemplate>
+              </Setter.Value>
+            </Setter>
+          </DataTrigger>
+        </DataTemplate.Triggers>
+      </DataTemplate>
+      <DataTemplate x:Key="columnOwner">
+        <Control Name="owner" Focusable="False">
+          <Control.Template>
+            <ControlTemplate>
+              <StackPanel>
+                <TextBlock TextAlignment="Center" Text="{Binding Path=Owner.Abbreviation}" />
+              </StackPanel>
+            </ControlTemplate>
+          </Control.Template>
+        </Control>
+        <DataTemplate.Triggers>
+          <DataTrigger Value="True" Binding="{Binding Path=IsEdited, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItemExtended}}}">
+            <Setter TargetName="owner" Property="Control.Template">
+              <Setter.Value>
+                <ControlTemplate>
+                  <ComboBox Name="CBOwner" Width="160" Height="25" SelectedItem="{Binding ValidatesOnDataErrors=True, ValidatesOnExceptions=True, NotifyOnValidationError=True, Path=Owner}" Validation.Error="InvalidType_Error">
+                    <ItemsControl.ItemsSource>
+                      <MultiBinding Converter="{x:Static viewModels:OwnersConverter.Instance}" ConverterParameter="{StaticResource viewModelRole}">
+                        <Binding Path="DataContext.Functionality" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type ListViewItemExtended}}" />
+                      </MultiBinding>
+                    </ItemsControl.ItemsSource>
+                    <FrameworkElement.Resources>
+                      <ResourceDictionary>
+                        <DataTemplate x:Key="{DataTemplateKey {x:Type strillsDataObjects:EntityObjectExtended}}" DataType="{x:Type strillsDataObjects:EntityObjectExtended}">
+                          <TextBlock Text="{Binding Abbreviation}" ToolTip="{Binding Description}" />
+                        </DataTemplate>
+                      </ResourceDictionary>
+                    </FrameworkElement.Resources>
+                  </ComboBox>
+                </ControlTemplate>
+              </Setter.Value>
+            </Setter>
+          </DataTrigger>
+        </DataTemplate.Triggers>
+      </DataTemplate>
+      <DataTemplate x:Key="columnCanCreate">
+        <Control Name="canCreate" Focusable="False">
+          <Control.Template>
+            <ControlTemplate>
+              <StackPanel>
+                <CheckBox Name="TBCanCreate" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" IsEnabled="{Binding Path=IsEdited, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItemExtended}}}" IsChecked="{Binding Path=CanCreate}" />
+              </StackPanel>
+            </ControlTemplate>
+          </Control.Template>
+        </Control>
+      </DataTemplate>
+      <DataTemplate x:Key="columnCanRead">
+        <Control Name="canRead" Focusable="False">
+          <Control.Template>
+            <ControlTemplate>
+              <StackPanel>
+                <CheckBox Name="TBCanRead" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" IsEnabled="{Binding Path=IsEdited, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItemExtended}}}" IsChecked="{Binding Path=CanRead}" />
+              </StackPanel>
+            </ControlTemplate>
+          </Control.Template>
+        </Control>
+      </DataTemplate>
+      <DataTemplate x:Key="columnCanUpdate">
+        <Control Name="canUpdate" Focusable="False">
+          <Control.Template>
+            <ControlTemplate>
+              <StackPanel>
+                <CheckBox Name="TBCanUpdate" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" IsEnabled="{Binding Path=IsEdited, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItemExtended}}}" IsChecked="{Binding Path=CanUpdate}" />
+              </StackPanel>
+            </ControlTemplate>
+          </Control.Template>
+        </Control>
+      </DataTemplate>
+      <DataTemplate x:Key="columnCanDelete">
+        <Control Name="canDelete" Focusable="False">
+          <Control.Template>
+            <ControlTemplate>
+              <StackPanel>
+                <CheckBox Name="TBCanDelete" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" IsEnabled="{Binding Path=IsEdited, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItemExtended}}}" IsChecked="{Binding Path=CanDelete}" />
+              </StackPanel>
+            </ControlTemplate>
+          </Control.Template>
+        </Control>
+      </DataTemplate>
+      <DataTemplate x:Key="columnGenerated">
+        <Control Name="canDelete" Focusable="False">
+          <Control.Template>
+            <ControlTemplate>
+              <StackPanel>
+                <CheckBox Name="TBGenerated" HorizontalAlignment="Center" VerticalAlignment="Center" IsEnabled="False" Height="25" IsChecked="{Binding Path=Generated}" />
+              </StackPanel>
+            </ControlTemplate>
+          </Control.Template>
+        </Control>
+      </DataTemplate>
+    </ResourceDictionary>
+  </FrameworkElement.Resources>
+  <StackPanel Style="{StaticResource entityGridStackPanel}">
+    <ListViewExtended Name="LVParametrization_Roles" MaxHeight="470" ItemContainerStyle="{StaticResource itemStyle}" ItemsSource="{Binding}" CommandAddItem="{Binding Source={StaticResource viewModelRole}, Path=CMDAddItem}" CommandEditItem="{Binding Source={StaticResource viewModelRole}, Path=CMDEditItem}" CommandRemoveItem="{Binding Source={StaticResource viewModelRole}, Path=CMDRemoveItem}" CommandConfirm="{Binding Source={StaticResource viewModelRole}, Path=CMDConfirm}" CommandCancel="{Binding Source={StaticResource viewModelRole}, Path=CMDCancel}">
+      <ListView.View>
+        <GridView ColumnHeaderTemplate="{StaticResource headerTemplateTransparent}" ColumnHeaderContainerStyle="{StaticResource gridViewHeaderStyle}">
+          <GridViewColumnExtended Width="200" CellTemplate="{StaticResource columnFunctionality}" SortPropertyName="Functionality.Abbreviation" Header="{Resx ResxName=ReCross.FE.Views.RoleViewGrid, Key=L_Functionality}" />
+          <GridViewColumnExtended Width="170" CellTemplate="{StaticResource columnOwner}" SortPropertyName="Owner.Abbreviation" Header="{Resx ResxName=ReCross.FE.Views.RoleViewGrid, Key=L_Owner}" />
+          <GridViewColumnExtended Width="100" CellTemplate="{StaticResource columnCanCreate}" SortPropertyName="CanCreate" Header="{Resx ResxName=ReCross.FE.Views.RoleViewGrid, Key=L_CanCreate}" />
+          <GridViewColumnExtended Width="100" CellTemplate="{StaticResource columnCanRead}" SortPropertyName="CanRead" Header="{Resx ResxName=ReCross.FE.Views.RoleViewGrid, Key=L_CanRead}" />
+          <GridViewColumnExtended Width="100" CellTemplate="{StaticResource columnCanUpdate}" SortPropertyName="CanUpdate" Header="{Resx ResxName=ReCross.FE.Views.RoleViewGrid, Key=L_CanUpdate}" />
+          <GridViewColumnExtended Width="100" CellTemplate="{StaticResource columnCanDelete}" SortPropertyName="CanDelete" Header="{Resx ResxName=ReCross.FE.Views.RoleViewGrid, Key=L_CanDelete}" />
+          <GridViewColumnExtended Width="100" CellTemplate="{StaticResource columnGenerated}" SortPropertyName="Generated" Header="{Resx ResxName=ReCross.FE.Views.RoleViewGrid, Key=L_Generated}" />
+          <GridViewColumn HeaderTemplate="{StaticResource operationsEditableGridCustomViewHeader}" CellTemplate="{StaticResource operationsEditableGridCustomViewCell}" />
+        </GridView>
+      </ListView.View>
+    </ListViewExtended>
+  </StackPanel>
+</strillsUIUserControls:UserControlGridBase>

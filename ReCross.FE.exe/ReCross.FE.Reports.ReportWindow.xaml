@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Window x:Class="ReCross.FE.Reports.ReportWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="Document" WindowStartupLocation="CenterScreen" WindowState="Maximized" Width="1024" Height="768" xmlns:reports="clr-namespace:ReCross.FE.Reports;assembly=ReCross.FE" Activated="Window_Activated">
+  <Grid>
+    <DocumentViewer Name="documentViewer" />
+  </Grid>
+</Window>

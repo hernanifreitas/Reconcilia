@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<strillsUIUserControls:UserControlFormBase x:Class="ReCross.FE.Views.GroupViewForm" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:models="clr-namespace:ReCross.BE.DataObjects;assembly=ReCross.BE" xmlns:views="clr-namespace:ReCross.FE.Views" xmlns:viewModels="clr-namespace:ReCross.FE.ViewModels" xmlns:strillsUIUserControls="clr-namespace:Strills.WPF.UI.UserControls;assembly=Strills.WPF.UI" xmlns:strillsUIControlAdapters="clr-namespace:Strills.WPF.UI.Controls.Internal;assembly=Strills.WPF.UI" xmlns:strillsUICommands="clr-namespace:Strills.WPF.UI.Commands;assembly=Strills.WPF.UI" Height="Auto" Width="Auto" Loaded="UserControl_Loaded">
+  <DockPanel>
+    <WrapPanel Style="{StaticResource entityFormWrapPanel}" Height="430" DockPanel.Dock="Top">
+      <StackPanel Width="340" VerticalAlignment="Top">
+        <TextBlock Name="LAbbreviation" Style="{StaticResource formTextBlock}" Text="{Resx ResxName=ReCross.FE.Views.GroupViewForm, Key=L_Abbreviation}" />
+        <TextBox Name="TBAbbreviation" MaxLength="50" Width="320" Text="{Binding UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, NotifyOnValidationError=True, Path=Abbreviation}" Validation.Error="InvalidType_Error" />
+        <ContentPresenter Height="30" Content="{Binding ElementName=TBAbbreviation, Path=(Validation.Errors)[0]}" />
+      </StackPanel>
+      <StackPanel Width="600" VerticalAlignment="Top" DataContext="{Binding Source={StaticResource viewModelGroup}, Path=DataList}">
+        <TextBlock Name="LDescription" Style="{StaticResource formTextBlock}" Text="{Resx ResxName=ReCross.FE.Views.GroupViewForm, Key=L_Description}" />
+        <TextBox Name="TBDescription" MaxLength="200" Width="580" Text="{Binding UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, NotifyOnValidationError=True, Path=Description}" Validation.Error="InvalidType_Error" />
+        <ContentPresenter Height="30" Content="{Binding ElementName=TBDescription, Path=(Validation.Errors)[0]}" />
+      </StackPanel>
+      <StackPanel Width="340" VerticalAlignment="Center">
+        <TextBlock Name="LIsOrEnabled" Style="{StaticResource formTextBlock}" Text="{Resx ResxName=ReCross.FE.Views.GroupViewForm, Key=L_IsOrEnabled}" />
+        <CheckBox Name="CBIsOrEnabled" VerticalAlignment="Center" Height="25" IsChecked="{Binding Path=IsOrEnabled}" />
+      </StackPanel>
+      <StackPanel Width="600" VerticalAlignment="Center">
+        <TextBlock Name="LIsActiveForOwners" Style="{StaticResource formTextBlock}" Text="{Resx ResxName=ReCross.FE.Views.GroupViewForm, Key=L_IsActiveForOwners}" />
+        <CheckBox Name="CBIsActiveForOwners" VerticalAlignment="Center" Height="25" IsChecked="{Binding Path=IsActiveForOwners}" Content="{Resx ResxName=ReCross.FE.Views.GroupViewForm, Key=L_IsActiveForOwnersExplain}" />
+      </StackPanel>
+      <StackPanel Width="940" VerticalAlignment="Top">
+        <FrameworkElement.DataContext>
+          <MultiBinding Converter="{x:Static viewModels:GroupRolesConverter.Instance}" ConverterParameter="{StaticResource viewModelGroupRoles}">
+            <Binding Source="{x:Static Application.Current}" Path="StateData.CurrentEditedRootRecord" UpdateSourceTrigger="PropertyChanged" />
+          </MultiBinding>
+        </FrameworkElement.DataContext>
+        <views:GroupRolesViewGrid />
+      </StackPanel>
+    </WrapPanel>
+    <DockPanel Dock="Bottom">
+      <StackPanel Style="{StaticResource formNavigationStackPanel}" DockPanel.Dock="Left">
+        <Button Name="BBack" Style="{StaticResource formButton}" Margin="0,0,10,0" Content="{Resx ResxName=Strills.WPF.Localization.Resources.ToolBar, Key=L_Back}">
+          <strillsUICommands:CommandBehaviorCollection.Behaviors>
+            <strillsUICommands:BehaviorBinding Event="Click" Command="strillsUIUserControls:UserControlItemBase.CMDViewItemList" />
+            <strillsUICommands:BehaviorBinding Event="Click" Command="{Binding Source={StaticResource viewModelGroup}, Path=CMDCancel}" />
+          </strillsUICommands:CommandBehaviorCollection.Behaviors>
+        </Button>
+      </StackPanel>
+      <StackPanel Style="{StaticResource formButtonsStackPanel}" DockPanel.Dock="Left">
+        <Button Name="BConfirm" Style="{StaticResource formButton}" Margin="0,0,10,0" Content="{Resx ResxName=Strills.WPF.Localization.Resources.ToolBar, Key=L_Confirm}" Command="{Binding Source={StaticResource viewModelGroup}, Path=CMDConfirm}">
+          <strillsUICommands:CommandBehaviorCollection.Behaviors>
+            <strillsUICommands:BehaviorBinding Event="Click" Command="strillsUIUserControls:UserControlItemBase.CMDViewItemList" />
+          </strillsUICommands:CommandBehaviorCollection.Behaviors>
+        </Button>
+        <Button Name="BCancel" Style="{StaticResource formButton}" Margin="0,0,10,0" Content="{Resx ResxName=Strills.WPF.Localization.Resources.ToolBar, Key=L_Cancel}">
+          <strillsUICommands:CommandBehaviorCollection.Behaviors>
+            <strillsUICommands:BehaviorBinding Event="Click" Command="strillsUIUserControls:UserControlItemBase.CMDViewItemList" />
+            <strillsUICommands:BehaviorBinding Event="Click" Command="{Binding Source={StaticResource viewModelGroup}, Path=CMDCancel}" />
+          </strillsUICommands:CommandBehaviorCollection.Behaviors>
+        </Button>
+      </StackPanel>
+    </DockPanel>
+  </DockPanel>
+</strillsUIUserControls:UserControlFormBase>

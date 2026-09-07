@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserControl x:Class="ReCross.FE.Views.UserViewGrid" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:strillsConverters="clr-namespace:Strills.WPF.Localization.Converters;assembly=Strills.WPF.Localization" xmlns:strillsUIUserControls="clr-namespace:Strills.WPF.UI.UserControls;assembly=Strills.WPF.UI" xmlns:strillsUICommands="clr-namespace:Strills.WPF.UI.Commands;assembly=Strills.WPF.UI" xmlns:viewModels="clr-namespace:ReCross.FE.ViewModels" Height="Auto" Width="Auto" xmlns:views="clr-namespace:ReCross.FE.Views" Loaded="UserControl_Loaded">
+  <StackPanel Style="{StaticResource entityGridStackPanel}">
+    <ListViewExtended Name="LVParametrization_Users" MaxHeight="470" ItemsSource="{Binding}" CommandAddItem="{Binding Source={StaticResource viewModelUser}, Path=CMDAddItem}" CommandEditItem="{Binding Source={StaticResource viewModelUser}, Path=CMDEditItem}" CommandRemoveItem="{Binding Source={StaticResource viewModelUser}, Path=CMDRemoveItem}">
+      <strillsUICommands:CommandBehaviorCollection.Behaviors>
+        <strillsUICommands:BehaviorBinding Event="MouseDoubleClick" Command="{Binding Source={StaticResource viewModelUser}, Path=CMDViewItem}" />
+        <strillsUICommands:BehaviorBinding Event="MouseDoubleClick" Command="strillsUIUserControls:UserControlItemBase.CMDViewItem" />
+      </strillsUICommands:CommandBehaviorCollection.Behaviors>
+      <ListView.View>
+        <GridView ColumnHeaderTemplate="{StaticResource headerTemplateTransparent}" ColumnHeaderContainerStyle="{StaticResource gridViewHeaderStyle}">
+          <GridViewColumnExtended Width="80" SortPropertyName="Id" IsDefaultSortColumn="True" Header="{Resx ResxName=ReCross.FE.Views.UserViewGrid, Key=L_Id}" DisplayMemberBinding="{Binding Path=Id}" />
+          <GridViewColumnExtended Width="185" SortPropertyName="FirstName" Header="{Resx ResxName=ReCross.FE.Views.UserViewGrid, Key=L_FirstName}" DisplayMemberBinding="{Binding Path=FirstName}" />
+          <GridViewColumnExtended Width="185" SortPropertyName="LastName" Header="{Resx ResxName=ReCross.FE.Views.UserViewGrid, Key=L_LastName}" DisplayMemberBinding="{Binding Path=LastName}" />
+          <GridViewColumnExtended Width="180" SortPropertyName="BirthDate" Header="{Resx ResxName=ReCross.FE.Views.UserViewGrid, Key=L_BirthDate}" DisplayMemberBinding="{Binding Path=BirthDate, Converter={x:Static strillsConverters:DateConverter.Instance}}" />
+          <GridViewColumnExtended Width="210" SortPropertyName="Group.Abbreviation" Header="{Resx ResxName=ReCross.FE.Views.UserViewGrid, Key=L_Group}" DisplayMemberBinding="{Binding Path=Group.Abbreviation}" />
+          <GridViewColumn HeaderTemplate="{StaticResource operationsGridViewHeader}" CellTemplate="{StaticResource operationsGridViewCell}" />
+        </GridView>
+      </ListView.View>
+    </ListViewExtended>
+  </StackPanel>
+</UserControl>

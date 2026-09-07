@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserControlItemBase x:Class="ReCross.FE.Views.CustomerView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:strillsUIControls="clr-namespace:Strills.WPF.UI.Controls;assembly=Strills.WPF.UI" xmlns:strillsUICommands="clr-namespace:Strills.WPF.UI.Commands;assembly=Strills.WPF.UI" xmlns:converters="clr-namespace:ReCross.FE.Converters" xmlns:viewModels="clr-namespace:ReCross.FE.ViewModels" xmlns:views="clr-namespace:ReCross.FE.Views" Height="Auto" Width="Auto" Loaded="UserControl_Loaded">
+  <FrameworkElement.Resources>
+    <ResourceDictionary>
+      <TranslateTransform x:Key="itemListStackPanelTransformTabs" X="-2500" />
+      <TranslateTransform x:Key="itemStackPanelTransformTabs" X="-2500" Y="-520" />
+    </ResourceDictionary>
+  </FrameworkElement.Resources>
+  <TabControl>
+    <TabItem IsSelected="True" Header="{Resx ResxName=ReCross.FE.Views.CustomerView, Key=L_Person}" IsEnabled="{Binding Source={x:Static Application.Current}, Path=StateData.IsNotViewingNetherEditingMode, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding Source={x:Static Application.Current}, Path=UserGenericPermissions, Converter={x:Static converters:ItemVisibilityConverter.Instance}, ConverterParameter=Persons}">
+      <StackPanel Visibility="{Binding Source={x:Static Application.Current}, Path=UserGenericPermissions, Converter={x:Static converters:ItemVisibilityConverter.Instance}, ConverterParameter=Persons}">
+        <FrameworkElement.DataContext>
+          <MultiBinding Converter="{x:Static viewModels:PersonEntityCollConverter.Instance}" ConverterParameter="{StaticResource viewModelPersonEntity}">
+            <Binding Source="{x:Static Application.Current}" Path="StateData.IsLoggedIn" />
+          </MultiBinding>
+        </FrameworkElement.DataContext>
+        <StackPanel Name="SPItemList0" Style="{StaticResource itemListStackPanel}" RenderTransform="{StaticResource itemListStackPanelTransformTabs}" MinHeight="520" MaxHeight="520">
+          <Border Style="{StaticResource entityViewBorder}">
+            <WrapPanel Style="{StaticResource itemListWrapPanel}" Height="470">
+              <views:PersonEntityViewGrid />
+            </WrapPanel>
+          </Border>
+        </StackPanel>
+        <StackPanel Name="SPItem0" Style="{StaticResource itemStackPanel}" RenderTransform="{StaticResource itemStackPanelTransformTabs}" MinHeight="520" MaxHeight="520">
+          <Border Style="{StaticResource entityViewBorder}">
+            <views:PersonEntityViewForm />
+          </Border>
+        </StackPanel>
+      </StackPanel>
+    </TabItem>
+    <TabItem Header="{Resx ResxName=ReCross.FE.Views.CustomerView, Key=L_Company}" IsEnabled="{Binding Source={x:Static Application.Current}, Path=StateData.IsNotViewingNetherEditingMode, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding Source={x:Static Application.Current}, Path=UserGenericPermissions, Converter={x:Static converters:ItemVisibilityConverter.Instance}, ConverterParameter=Companies}">
+      <StackPanel Visibility="{Binding Source={x:Static Application.Current}, Path=UserGenericPermissions, Converter={x:Static converters:ItemVisibilityConverter.Instance}, ConverterParameter=Companies}">
+        <FrameworkElement.DataContext>
+          <MultiBinding Converter="{x:Static viewModels:CompanyEntityCollConverter.Instance}" ConverterParameter="{StaticResource viewModelCompanyEntity}">
+            <Binding Source="{x:Static Application.Current}" Path="StateData.IsLoggedIn" />
+          </MultiBinding>
+        </FrameworkElement.DataContext>
+        <StackPanel Name="SPItemList1" Style="{StaticResource itemListStackPanel}" RenderTransform="{StaticResource itemListStackPanelTransformTabs}" MinHeight="520" MaxHeight="520">
+          <Border Style="{StaticResource entityViewBorder}">
+            <WrapPanel Style="{StaticResource itemListWrapPanel}" Height="470">
+              <views:CompanyEntityViewGrid />
+            </WrapPanel>
+          </Border>
+        </StackPanel>
+        <StackPanel Name="SPItem1" Style="{StaticResource itemStackPanel}" RenderTransform="{StaticResource itemStackPanelTransformTabs}" MinHeight="520" MaxHeight="520">
+          <Border Style="{StaticResource entityViewBorder}">
+            <views:CompanyEntityViewForm />
+          </Border>
+        </StackPanel>
+      </StackPanel>
+    </TabItem>
+  </TabControl>
+</UserControlItemBase>

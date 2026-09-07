@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserControl x:Class="ReCross.FE.Views.GroupViewGrid" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:viewModels="clr-namespace:ReCross.FE.ViewModels" xmlns:strillsUIUserControls="clr-namespace:Strills.WPF.UI.UserControls;assembly=Strills.WPF.UI" xmlns:strillsUICommands="clr-namespace:Strills.WPF.UI.Commands;assembly=Strills.WPF.UI" Height="Auto" Width="Auto" xmlns:views="clr-namespace:ReCross.FE.Views" Loaded="UserControl_Loaded">
+  <StackPanel Style="{StaticResource entityGridStackPanel}">
+    <ListViewExtended Name="LVParametrization_Groups" MaxHeight="470" ItemsSource="{Binding}" CommandAddItem="{Binding Source={StaticResource viewModelGroup}, Path=CMDAddItem}" CommandEditItem="{Binding Source={StaticResource viewModelGroup}, Path=CMDEditItem}" CommandRemoveItem="{Binding Source={StaticResource viewModelGroup}, Path=CMDRemoveItem}">
+      <strillsUICommands:CommandBehaviorCollection.Behaviors>
+        <strillsUICommands:BehaviorBinding Event="MouseDoubleClick" Command="{Binding Source={StaticResource viewModelGroup}, Path=CMDViewItem}" />
+        <strillsUICommands:BehaviorBinding Event="MouseDoubleClick" Command="strillsUIUserControls:UserControlItemBase.CMDViewItem" />
+      </strillsUICommands:CommandBehaviorCollection.Behaviors>
+      <ListView.View>
+        <GridView ColumnHeaderTemplate="{StaticResource headerTemplateTransparent}" ColumnHeaderContainerStyle="{StaticResource gridViewHeaderStyle}">
+          <GridViewColumnExtended Width="305" SortPropertyName="Abbreviation" Header="{Resx ResxName=ReCross.FE.Views.GroupViewGrid, Key=L_Abbreviation}" DisplayMemberBinding="{Binding Path=Abbreviation}" />
+          <GridViewColumnExtended Width="535" SortPropertyName="Description" Header="{Resx ResxName=ReCross.FE.Views.GroupViewGrid, Key=L_Description}" DisplayMemberBinding="{Binding Path=Description}" />
+          <GridViewColumn HeaderTemplate="{StaticResource operationsGridViewHeader}" CellTemplate="{StaticResource operationsGridViewCell}" />
+        </GridView>
+      </ListView.View>
+    </ListViewExtended>
+  </StackPanel>
+</UserControl>

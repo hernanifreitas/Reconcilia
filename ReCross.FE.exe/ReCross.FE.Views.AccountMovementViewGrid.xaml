@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<strillsUIUserControls:UserControlGridBase x:Class="ReCross.FE.Views.AccountMovementViewGrid" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:strillsConverters="clr-namespace:Strills.WPF.Localization.Converters;assembly=Strills.WPF.Localization" xmlns:strillsUIUserControls="clr-namespace:Strills.WPF.UI.UserControls;assembly=Strills.WPF.UI" xmlns:strillsUICommands="clr-namespace:Strills.WPF.UI.Commands;assembly=Strills.WPF.UI" xmlns:models="clr-namespace:ReCross.BE.DataObjects;assembly=ReCross.BE" xmlns:viewModels="clr-namespace:ReCross.FE.ViewModels" Height="Auto" Width="Auto" xmlns:views="clr-namespace:ReCross.FE.Views" Loaded="UserControl_Loaded">
+  <FrameworkElement.Resources>
+    <ResourceDictionary>
+      <DataTemplate x:Key="columnAccountDate">
+        <Control Name="accountDate" Focusable="False">
+          <Control.Template>
+            <ControlTemplate>
+              <StackPanel>
+                <TextBlock TextAlignment="Center" Text="{Binding Path=AccountDate, Converter={x:Static strillsConverters:DateConverter.Instance}}" />
+              </StackPanel>
+            </ControlTemplate>
+          </Control.Template>
+        </Control>
+        <DataTemplate.Triggers>
+          <DataTrigger Value="True" Binding="{Binding Path=IsEdited, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItemExtended}}}">
+            <Setter TargetName="accountDate" Property="Control.Template">
+              <Setter.Value>
+                <ControlTemplate>
+                  <TextBox HorizontalAlignment="Center" Width="90" Text="{Binding ValidatesOnDataErrors=True, ValidatesOnExceptions=True, NotifyOnValidationError=True, Path=AccountDate, Converter={x:Static strillsConverters:DateConverter.Instance}}" Validation.Error="InvalidType_Error" />
+                </ControlTemplate>
+              </Setter.Value>
+            </Setter>
+          </DataTrigger>
+        </DataTemplate.Triggers>
+      </DataTemplate>
+      <DataTemplate x:Key="columnDebitAmount">
+        <Control Name="debitAmount" Focusable="False">
+          <Control.Template>
+            <ControlTemplate>
+              <TextBlock TextAlignment="Right" Text="{Binding Path=DebitAmount, Converter={x:Static strillsConverters:MoneyConverter.Instance}, ConverterParameter=true}" />
+            </ControlTemplate>
+          </Control.Template>
+        </Control>
+        <DataTemplate.Triggers>
+          <DataTrigger Value="True" Binding="{Binding Path=IsEdited, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItemExtended}}}">
+            <Setter TargetName="debitAmount" Property="Control.Template">
+              <Setter.Value>
+                <ControlTemplate>
+                  <TextBox TextAlignment="Right" Width="140" Text="{Binding UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, NotifyOnValidationError=True, Path=DebitAmount, Converter={x:Static strillsConverters:MoneyConverter.Instance}}" Validation.Error="InvalidType_Error" />
+                </ControlTemplate>
+              </Setter.Value>
+            </Setter>
+          </DataTrigger>
+        </DataTemplate.Triggers>
+      </DataTemplate>
+      <DataTemplate x:Key="columnCreditAmount">
+        <Control Name="creditAmount" Focusable="False">
+          <Control.Template>
+            <ControlTemplate>
+              <TextBlock TextAlignment="Right" Text="{Binding Path=CreditAmount, Converter={x:Static strillsConverters:MoneyConverter.Instance}}" />
+            </ControlTemplate>
+          </Control.Template>
+        </Control>
+        <DataTemplate.Triggers>
+          <DataTrigger Value="True" Binding="{Binding Path=IsEdited, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItemExtended}}}">
+            <Setter TargetName="creditAmount" Property="Control.Template">
+              <Setter.Value>
+                <ControlTemplate>
+                  <TextBox TextAlignment="Right" Width="140" Text="{Binding UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, NotifyOnValidationError=True, Path=CreditAmount, Converter={x:Static strillsConverters:MoneyConverter.Instance}}" Validation.Error="InvalidType_Error" />
+                </ControlTemplate>
+              </Setter.Value>
+            </Setter>
+          </DataTrigger>
+        </DataTemplate.Triggers>
+      </DataTemplate>
+      <DataTemplate x:Key="columnDescription">
+        <Control Name="description" Focusable="False">
+          <Control.Template>
+            <ControlTemplate>
+              <TextBlock Text="{Binding Path=Description}" ToolTip="{Binding Path=Description}" />
+            </ControlTemplate>
+          </Control.Template>
+        </Control>
+        <DataTemplate.Triggers>
+          <DataTrigger Value="True" Binding="{Binding Path=IsEdited, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItemExtended}}}">
+            <Setter TargetName="description" Property="Control.Template">
+              <Setter.Value>
+                <ControlTemplate>
+                  <TextBox Width="290" Text="{Binding UpdateSourceTrigger=PropertyChanged, Path=Description}" />
+                </ControlTemplate>
+              </Setter.Value>
+            </Setter>
+          </DataTrigger>
+        </DataTemplate.Triggers>
+      </DataTemplate>
+    </ResourceDictionary>
+  </FrameworkElement.Resources>
+  <StackPanel Style="{StaticResource entityGridStackPanel}" Width="900">
+    <ListViewExtended Name="LVAccountMovements" MaxHeight="370" ItemContainerStyle="{StaticResource itemStyle}" ItemsSource="{Binding}" CommandAddItem="{Binding Source={StaticResource viewModelAccountMovement}, Path=CMDAddItem}" CommandEditItem="{Binding Source={StaticResource viewModelAccountMovement}, Path=CMDEditItem}" CommandRemoveItem="{Binding Source={StaticResource viewModelAccountMovement}, Path=CMDRemoveItem}" CommandConfirm="{Binding Source={StaticResource viewModelAccountMovement}, Path=CMDConfirm}" CommandCancel="{Binding Source={StaticResource viewModelAccountMovement}, Path=CMDCancel}">
+      <ListView.View>
+        <GridView ColumnHeaderTemplate="{StaticResource headerTemplateTransparent}" ColumnHeaderContainerStyle="{StaticResource gridViewHeaderStyle}">
+          <GridViewColumnExtended Width="180" CellTemplate="{StaticResource columnAccountDate}" SortPropertyName="AccountDate" IsDefaultSortColumn="True" Header="{Resx ResxName=ReCross.FE.Views.AccountMovementViewGrid, Key=L_AccountDate}" />
+          <GridViewColumnExtended Width="150" CellTemplate="{StaticResource columnDebitAmount}" SortPropertyName="DebitAmount" Header="{Resx ResxName=ReCross.FE.Views.AccountMovementViewGrid, Key=L_DebitAmount}" />
+          <GridViewColumnExtended Width="150" CellTemplate="{StaticResource columnCreditAmount}" SortPropertyName="CreditAmount" Header="{Resx ResxName=ReCross.FE.Views.AccountMovementViewGrid, Key=L_CreditAmount}" />
+          <GridViewColumnExtended Width="300" CellTemplate="{StaticResource columnDescription}" SortPropertyName="Description" Header="{Resx ResxName=ReCross.FE.Views.AccountMovementViewGrid, Key=L_Description}" />
+          <GridViewColumn HeaderTemplate="{StaticResource operationsEditableGridViewHeader}" CellTemplate="{StaticResource operationsEditableGridViewCell}" />
+        </GridView>
+      </ListView.View>
+    </ListViewExtended>
+  </StackPanel>
+</strillsUIUserControls:UserControlGridBase>

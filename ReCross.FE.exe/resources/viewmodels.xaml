@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:viewModels="clr-namespace:ReCross.FE.ViewModels" xmlns:reCrossBE="clr-namespace:ReCross.BE.DataObjects;assembly=ReCross.BE" xmlns:strillsUICommands="clr-namespace:Strills.WPF.UI.Commands;assembly=Strills.WPF.UI" xmlns:strillsUIUserControls="clr-namespace:Strills.WPF.UI.UserControls;assembly=Strills.WPF.UI">
+  <viewModels:LoginViewModel x:Key="viewModelLogin" />
+  <viewModels:ChangePasswordViewModel x:Key="viewModelChangePassword" />
+  <viewModels:AppConfigurationViewModel x:Key="viewModelAppConfiguration" />
+  <viewModels:MovementFilterViewModel x:Key="viewModelMovementFilter" />
+  <viewModels:PersonEntityViewModel x:Key="viewModelPersonEntity" />
+  <viewModels:CompanyEntityViewModel x:Key="viewModelCompanyEntity" />
+  <viewModels:BankEntityViewModel x:Key="viewModelBankEntity" />
+  <viewModels:BankAccountViewModel x:Key="viewModelBankAccount" />
+  <viewModels:BankMovementViewModel x:Key="viewModelBankMovement" />
+  <viewModels:AccountMovementViewModel x:Key="viewModelAccountMovement" />
+  <viewModels:ReconciliationViewModel x:Key="viewModelReconciliation" />
+  <viewModels:ReconciliationResultViewModel x:Key="viewModelReconciliationResult" />
+  <viewModels:BankMovementParamViewModel x:Key="viewModelBankMovementParam" />
+  <viewModels:SWMovementParamViewModel x:Key="viewModelSWMovementParam" />
+  <viewModels:SoftwareEntityViewModel x:Key="viewModelSoftwareEntity" />
+  <viewModels:UserViewModel x:Key="viewModelUser" />
+  <viewModels:GroupViewModel x:Key="viewModelGroup" />
+  <viewModels:RoleViewModel x:Key="viewModelRole" />
+  <viewModels:GroupRolesViewModel x:Key="viewModelGroupRoles" />
+  <viewModels:UserRolesViewModel x:Key="viewModelUserRoles" />
+  <viewModels:SearchViewModel x:Key="viewModelSearch" />
+</ResourceDictionary>

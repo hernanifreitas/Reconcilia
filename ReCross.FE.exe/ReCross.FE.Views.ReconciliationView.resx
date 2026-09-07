@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+<resheader name="resmimetype"><value>text/microsoft-resx</value></resheader><resheader name="version"><value>1.3</value></resheader><resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader><resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader><data name="L_Reconciliations" xml:space="preserve"><value>Reconciliations</value></data>
+  <data name="Msg_OwnMovements" xml:space="preserve"><value>You're about to match movements of the same type. Do you want to continue?</value></data>
+  <data name="Msg_ManyToManyMovements" xml:space="preserve"><value>You're about to match several account movements with several bank movements. Do you want to continue?</value></data>
+  <data name="L_Bankroll" xml:space="preserve"><value>Bankroll</value></data>
+  <data name="Msg_MovementsEmpty" xml:space="preserve"><value>One (or both) of movements group has no movement selected.</value></data>
+  <data name="L_ReasonBalance" xml:space="preserve"><value>Reason Balance</value></data>
+  <data name="Msg_MovementsDontMatch" xml:space="preserve"><value>Chosen movements don't match!</value></data>
+  <data name="Msg_SelectMoreMovements" xml:space="preserve"><value>You've just select one movement. You need to select at least two movements.</value></data>
+  </root>

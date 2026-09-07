@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<strillsUIUserControls:UserControlFormBase x:Class="ReCross.FE.Views.CompanyEntityViewForm" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:strillsConverters="clr-namespace:Strills.WPF.Localization.Converters;assembly=Strills.WPF.Localization" xmlns:strillsUIUserControls="clr-namespace:Strills.WPF.UI.UserControls;assembly=Strills.WPF.UI" xmlns:strillsUIControlAdapters="clr-namespace:Strills.WPF.UI.Controls.Internal;assembly=Strills.WPF.UI" xmlns:strillsUICommands="clr-namespace:Strills.WPF.UI.Commands;assembly=Strills.WPF.UI" xmlns:converters="clr-namespace:ReCross.FE.Converters" xmlns:models="clr-namespace:ReCross.BE.DataObjects;assembly=ReCross.BE" xmlns:viewModels="clr-namespace:ReCross.FE.ViewModels" Height="Auto" Width="Auto" xmlns:views="clr-namespace:ReCross.FE.Views" Loaded="UserControl_Loaded">
+  <DockPanel>
+    <WrapPanel Style="{StaticResource entityFormWrapPanel}" Height="430" DockPanel.Dock="Top">
+      <StackPanel Width="440" VerticalAlignment="Top">
+        <TextBlock Name="LFullName" Style="{StaticResource formTextBlock}" Text="{Resx ResxName=ReCross.FE.Views.CompanyEntityViewForm, Key=L_FullName}" />
+        <TextBox Name="TBFullName" MaxLength="50" Width="420" Text="{Binding UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, NotifyOnValidationError=True, Path=FullName}" Validation.Error="InvalidType_Error" />
+        <ContentPresenter Height="30" Content="{Binding ElementName=TBFullName, Path=(Validation.Errors)[0]}" />
+      </StackPanel>
+      <StackPanel Width="500" VerticalAlignment="Top">
+        <TextBlock Name="LShortName" Style="{StaticResource formTextBlock}" Text="{Resx ResxName=ReCross.FE.Views.CompanyEntityViewForm, Key=L_ShortName}" />
+        <TextBox Name="TBShortName" MaxLength="20" Width="260" Text="{Binding UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, NotifyOnValidationError=True, Path=ShortName}" Validation.Error="InvalidType_Error" />
+        <ContentPresenter Height="30" Content="{Binding ElementName=TBShortName, Path=(Validation.Errors)[0]}" />
+      </StackPanel>
+      <StackPanel Width="220" VerticalAlignment="Top">
+        <TextBlock Name="LFiscalNumber" Style="{StaticResource formTextBlock}" Text="{Resx ResxName=ReCross.FE.Views.CompanyEntityViewForm, Key=L_FiscalNumber}" />
+        <TextBox Name="TBFiscalNumber" MaxLength="50" Width="200" Text="{Binding UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, NotifyOnValidationError=True, Path=FiscalNumber}" Validation.Error="InvalidType_Error" />
+        <ContentPresenter Height="30" Content="{Binding ElementName=TBFiscalNumber, Path=(Validation.Errors)[0]}" />
+      </StackPanel>
+      <StackPanel Width="720" VerticalAlignment="Top">
+        <TextBlock Name="LAddress" Style="{StaticResource formTextBlock}" Text="{Resx ResxName=ReCross.FE.Views.CompanyEntityViewForm, Key=L_Address}" />
+        <TextBox Name="TBAddress" MaxLength="200" Width="700" Text="{Binding UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, NotifyOnValidationError=True, Path=Address}" Validation.Error="InvalidType_Error" />
+        <ContentPresenter Height="30" Content="{Binding ElementName=TBAddress, Path=(Validation.Errors)[0]}" />
+      </StackPanel>
+      <StackPanel Width="220" VerticalAlignment="Top">
+        <TextBlock Name="LPhoneNumber" Style="{StaticResource formTextBlock}" Text="{Resx ResxName=ReCross.FE.Views.CompanyEntityViewForm, Key=L_PhoneNumber}" />
+        <TextBox Name="TBPhoneNumber" MaxLength="9" Width="90" Text="{Binding UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, NotifyOnValidationError=True, Path=PhoneNumber}" Validation.Error="InvalidType_Error" />
+        <ContentPresenter Height="30" Content="{Binding ElementName=TBPhoneNumber, Path=(Validation.Errors)[0]}" />
+      </StackPanel>
+      <StackPanel Width="360" VerticalAlignment="Top">
+        <TextBlock Name="LEmail" Style="{StaticResource formTextBlock}" Text="{Resx ResxName=ReCross.FE.Views.CompanyEntityViewForm, Key=L_Email}" />
+        <TextBox Name="TBEmail" MaxLength="50" Width="310" Text="{Binding UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, NotifyOnValidationError=True, Path=Email}" Validation.Error="InvalidType_Error" />
+        <ContentPresenter Height="30" Content="{Binding ElementName=TBEmail, Path=(Validation.Errors)[0]}" />
+      </StackPanel>
+      <StackPanel Width="360" VerticalAlignment="Top">
+        <TextBlock Name="LWebSite" Style="{StaticResource formTextBlock}" Text="{Resx ResxName=ReCross.FE.Views.CompanyEntityViewForm, Key=L_WebSite}" />
+        <TextBox Name="TBWebSite" MaxLength="50" Width="340" Text="{Binding UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, NotifyOnValidationError=True, Path=WebSite}" Validation.Error="InvalidType_Error" />
+        <ContentPresenter Height="30" Content="{Binding ElementName=TBWebSite, Path=(Validation.Errors)[0]}" />
+      </StackPanel>
+      <StackPanel Width="940" VerticalAlignment="Center">
+        <TextBlock Name="LSoftwareEntity" Style="{StaticResource formTextBlock}" Text="{Resx ResxName=ReCross.FE.Views.CompanyEntityViewForm, Key=L_SoftwareEntity}" />
+        <ComboBox Name="CBSoftwareEntity" Width="200" SelectedItem="{Binding ValidatesOnDataErrors=True, ValidatesOnExceptions=True, NotifyOnValidationError=True, Path=SoftwareEntity, Converter={x:Static strillsConverters:ComboBoxNullItemConverter.Instance}}" Validation.Error="InvalidType_Error">
+          <ItemsControl.ItemsSource>
+            <MultiBinding Converter="{x:Static converters:ComboBoxItemsConverter.Instance}" ConverterParameter="SoftwareEntities">
+              <Binding Source="{x:Static Application.Current}" Path="StateData.IsLoggedIn" Mode="TwoWay" />
+              <Binding Source="{x:Static Application.Current}" Path="CurrentDataContext.ParamData.SoftwareEntities" Mode="TwoWay" />
+            </MultiBinding>
+          </ItemsControl.ItemsSource>
+          <FrameworkElement.Resources>
+            <ResourceDictionary>
+              <DataTemplate x:Key="{DataTemplateKey {x:Type models:SoftwareEntity}}" DataType="{x:Type models:SoftwareEntity}">
+                <TextBlock Text="{Binding ShortName}" />
+              </DataTemplate>
+            </ResourceDictionary>
+          </FrameworkElement.Resources>
+        </ComboBox>
+        <ContentPresenter Height="30" Content="{Binding ElementName=CBSoftwareEntity, Path=(Validation.Errors)[0]}" />
+      </StackPanel>
+    </WrapPanel>
+    <DockPanel Dock="Bottom">
+      <StackPanel Style="{StaticResource formNavigationStackPanel}" DockPanel.Dock="Left">
+        <Button Name="BBack" Style="{StaticResource formButton}" Margin="0,0,10,0" Content="{Resx ResxName=Strills.WPF.Localization.Resources.ToolBar, Key=L_Back}">
+          <strillsUICommands:CommandBehaviorCollection.Behaviors>
+            <strillsUICommands:BehaviorBinding Event="Click" Command="strillsUIUserControls:UserControlItemBase.CMDViewItemList" />
+            <strillsUICommands:BehaviorBinding Event="Click" Command="{Binding Source={StaticResource viewModelCompanyEntity}, Path=CMDCancel}" />
+          </strillsUICommands:CommandBehaviorCollection.Behaviors>
+        </Button>
+      </StackPanel>
+      <StackPanel Style="{StaticResource formButtonsStackPanel}" DockPanel.Dock="Left">
+        <Button Name="BConfirm" Style="{StaticResource formButton}" Margin="0,0,10,0" Content="{Resx ResxName=Strills.WPF.Localization.Resources.ToolBar, Key=L_Confirm}" Command="{Binding Source={StaticResource viewModelCompanyEntity}, Path=CMDConfirm}">
+          <strillsUICommands:CommandBehaviorCollection.Behaviors>
+            <strillsUICommands:BehaviorBinding Event="Click" Command="strillsUIUserControls:UserControlItemBase.CMDViewItemList" />
+          </strillsUICommands:CommandBehaviorCollection.Behaviors>
+        </Button>
+        <Button Name="BCancel" Style="{StaticResource formButton}" Margin="0,0,10,0" Content="{Resx ResxName=Strills.WPF.Localization.Resources.ToolBar, Key=L_Cancel}">
+          <strillsUICommands:CommandBehaviorCollection.Behaviors>
+            <strillsUICommands:BehaviorBinding Event="Click" Command="strillsUIUserControls:UserControlItemBase.CMDViewItemList" />
+            <strillsUICommands:BehaviorBinding Event="Click" Command="{Binding Source={StaticResource viewModelCompanyEntity}, Path=CMDCancel}" />
+          </strillsUICommands:CommandBehaviorCollection.Behaviors>
+        </Button>
+      </StackPanel>
+    </DockPanel>
+  </DockPanel>
+</strillsUIUserControls:UserControlFormBase>

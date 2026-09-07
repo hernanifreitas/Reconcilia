@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+<resheader name="resmimetype"><value>text/microsoft-resx</value></resheader><resheader name="version"><value>1.3</value></resheader><resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader><resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader><data name="MenuItemEnum_Reconciliations" xml:space="preserve"><value>Reconciliations</value></data>
+  <data name="SubMenuItemEnum_Persons" xml:space="preserve"><value>Persons</value></data>
+  <data name="_Exit.Header" xml:space="preserve"><value>E_xit</value></data>
+  <data name="MenuItemEnum_BankAccounts" xml:space="preserve"><value>Bank Accounts</value></data>
+  <data name="SubMenuItemEnum_Groups" xml:space="preserve"><value>Groups</value></data>
+  <data name="MenuItemEnum_AccountMovements" xml:space="preserve"><value>Account Mov.</value></data>
+  <data name="_Edit.Header" xml:space="preserve"><value>_Edit</value></data>
+  <data name="SubMenuItemEnum_Companies" xml:space="preserve"><value>Companies</value></data>
+  <data name="_Help.Header" xml:space="preserve"><value>_Help</value></data>
+  <data name="OperationEnum_CloseReOpen" xml:space="preserve"><value>Close / ReOpen</value></data>
+  <data name="SubMenuItemEnum_ReconciliationResults" xml:space="preserve"><value>Rec. Results</value></data>
+  <data name="SubMenuItemEnum_Roles" xml:space="preserve"><value>Permissions</value></data>
+  <data name="OperationEnum_AutoLink" xml:space="preserve"><value>Auto Movement Link by Value (1 : 1)</value></data>
+  <data name="SubMenuItemEnum_Users" xml:space="preserve"><value>Users</value></data>
+  <data name="MenuItemEnum_BankMovements" xml:space="preserve"><value>Bank Mov.</value></data>
+  <data name="OperationEnum_LinkUnlink" xml:space="preserve"><value>Link / Unlink</value></data>
+  <data name="SubMenuItemEnum_SoftwareMovementParam" xml:space="preserve"><value>Software Mov.  Param.</value></data>
+  <data name="_File.Header" xml:space="preserve"><value>_File</value></data>
+  <data name="OperationEnum_Import" xml:space="preserve"><value>Import</value></data>
+  <data name="SubMenuItemEnum_BankEntities" xml:space="preserve"><value>Bank Entities</value></data>
+  <data name="SubMenuItemEnum_BankMovementParam" xml:space="preserve"><value>Bank Mov. Param.</value></data>
+  <data name="SubMenuItemEnum_SoftwareEntities" xml:space="preserve"><value>Software  (Entities)</value></data>
+  <data name="MenuItemEnum_Customers" xml:space="preserve"><value>Customers</value></data>
+  <data name="MenuItemEnum_Search" xml:space="preserve"><value>Search</value></data>
+  <data name="MenuItemEnum_Parametrization" xml:space="preserve"><value>Parametrization</value></data>
+  <data name="_Options.Header" xml:space="preserve"><value>_Options</value></data>
+  </root>

@@ -1,0 +1,53 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Projetos\\Reconcilia\\ReCross.FE-Fonte\\Strills.WPF.Reports.dll\\Strills.WPF.Reports.csproj": {}
+  },
+  "projects": {
+    "C:\\Projetos\\Reconcilia\\ReCross.FE-Fonte\\Strills.WPF.Reports.dll\\Strills.WPF.Reports.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Projetos\\Reconcilia\\ReCross.FE-Fonte\\Strills.WPF.Reports.dll\\Strills.WPF.Reports.csproj",
+        "projectName": "Strills.WPF.Reports",
+        "projectPath": "C:\\Projetos\\Reconcilia\\ReCross.FE-Fonte\\Strills.WPF.Reports.dll\\Strills.WPF.Reports.csproj",
+        "packagesPath": "C:\\Users\\CN-Lenovo\\.nuget\\packages\\",
+        "outputPath": "C:\\Projetos\\Reconcilia\\ReCross.FE-Fonte\\Strills.WPF.Reports.dll\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\CN-Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net48"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net48": {
+            "targetAlias": "net48",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net48": {
+          "targetAlias": "net48",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

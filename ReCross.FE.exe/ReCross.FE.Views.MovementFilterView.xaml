@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<strillsUIUserControls:UserControlFormBase x:Class="ReCross.FE.Views.MovementFilterView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:models="clr-namespace:ReCross.BE.DataObjects;assembly=ReCross.BE" xmlns:viewModels="clr-namespace:ReCross.FE.ViewModels" xmlns:views="clr-namespace:ReCross.FE.Views" xmlns:strillsUIUserControls="clr-namespace:Strills.WPF.UI.UserControls;assembly=Strills.WPF.UI" xmlns:strillsUICommands="clr-namespace:Strills.WPF.UI.Commands;assembly=Strills.WPF.UI" xmlns:strillsUIControlAdapters="clr-namespace:Strills.WPF.UI.Controls.Internal;assembly=Strills.WPF.UI" Height="Auto" Width="Auto" Loaded="UserControl_Loaded">
+  <FrameworkElement.Resources>
+    <ResourceDictionary>
+      <Style x:Key="calendarButton" TargetType="{x:Type Button}">
+        <Setter Property="FrameworkElement.Cursor" Value="Hand" />
+        <Setter Property="Width" Value="70" />
+        <Setter Property="Height" Value="70" />
+        <Setter Property="BorderBrush" Value="#00FFFFFF" />
+        <Setter Property="IsEnabled" Value="{Binding Source={x:Static Application.Current}, Path=StateData.IsNotEditingMode, UpdateSourceTrigger=PropertyChanged}" />
+        <Setter Property="strillsUICommands:CommandBehavior.Event" Value="Click" />
+        <Setter Property="strillsUICommands:CommandBehavior.Command" Value="{Binding Path=CMDChangeMonth, Source={StaticResource viewModelMovementFilter}}" />
+        <Setter Property="Background">
+          <Setter.Value>
+            <ImageBrush ImageSource="..\Images\BGCalendar.png" />
+          </Setter.Value>
+        </Setter>
+      </Style>
+      <Style x:Key="calendarMonthTextBlock" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource textBlock}">
+        <Setter Property="Margin" Value="10,2,0,0" />
+        <Setter Property="Foreground" Value="#FFFFFFFF" />
+        <Setter Property="FontFamily" Value="Arial" />
+        <Setter Property="FontSize" Value="10" />
+        <Setter Property="FontWeight" Value="Bold" />
+      </Style>
+      <Style x:Key="calendarNumberTextBlock" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource textBlock}">
+        <Setter Property="Margin" Value="0,0,0,0" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="FontFamily" Value="Verdana" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontWeight" Value="Bold" />
+      </Style>
+    </ResourceDictionary>
+  </FrameworkElement.Resources>
+  <WrapPanel Name="SPItem" Orientation="Horizontal" Margin="10" Width="940" VerticalAlignment="Center" HorizontalAlignment="Stretch" DataContext="{Binding Source={StaticResource viewModelMovementFilter}}">
+    <StackPanel Orientation="Horizontal" Width="235" Margin="0">
+      <TextBlock Name="LBankEntity" VerticalAlignment="Center" Margin="0,0,10,0" FontWeight="Bold" FontSize="15" Text="{Resx ResxName=ReCross.FE.Views.MovementFilterView, Key=L_BankEntity}" />
+      <ComboBox Name="CBBankEntity" Width="150" Height="25" SelectedItem="{Binding Source={x:Static Application.Current}, Path=CurrentDataContext.DataFilters.CurrentBankEntity}" IsEnabled="{Binding Source={x:Static Application.Current}, Path=StateData.IsNotEditingMode, UpdateSourceTrigger=PropertyChanged}">
+        <ItemsControl.ItemsSource>
+          <MultiBinding Converter="{x:Static viewModels:BankEntityConverter.Instance}" ConverterParameter="{StaticResource viewModelMovementFilter}">
+            <Binding Source="{x:Static Application.Current}" Path="CurrentDataContext.DataFilters.CurrentEntity" />
+          </MultiBinding>
+        </ItemsControl.ItemsSource>
+        <FrameworkElement.Resources>
+          <ResourceDictionary>
+            <DataTemplate x:Key="{DataTemplateKey {x:Type models:Entity}}" DataType="{x:Type models:Entity}">
+              <TextBlock Text="{Binding ShortName}" ToolTip="{Binding FullName}" />
+            </DataTemplate>
+          </ResourceDictionary>
+        </FrameworkElement.Resources>
+      </ComboBox>
+    </StackPanel>
+    <StackPanel Orientation="Horizontal" Width="388">
+      <TextBlock Name="LBankAccount" VerticalAlignment="Center" Margin="0,0,10,0" FontWeight="Bold" FontSize="15" Text="{Resx ResxName=ReCross.FE.Views.MovementFilterView, Key=L_BankAccount}" />
+      <ComboBox Name="CBBankAccount" Width="270" Height="25" SelectedItem="{Binding Source={x:Static Application.Current}, Path=CurrentDataContext.DataFilters.CurrentBankAccount}" IsEnabled="{Binding Source={x:Static Application.Current}, Path=StateData.IsNotEditingMode, UpdateSourceTrigger=PropertyChanged}">
+        <ItemsControl.ItemsSource>
+          <MultiBinding Converter="{x:Static viewModels:BankAccountConverter.Instance}" ConverterParameter="{StaticResource viewModelMovementFilter}">
+            <Binding Source="{x:Static Application.Current}" Path="CurrentDataContext.DataFilters.CurrentEntity" />
+            <Binding Source="{x:Static Application.Current}" Path="CurrentDataContext.DataFilters.CurrentBankEntity" />
+          </MultiBinding>
+        </ItemsControl.ItemsSource>
+        <FrameworkElement.Resources>
+          <ResourceDictionary>
+            <DataTemplate x:Key="{DataTemplateKey {x:Type models:BankAccount}}" DataType="{x:Type models:BankAccount}">
+              <TextBlock Text="{Binding Description}" ToolTip="{Binding Description}" />
+            </DataTemplate>
+          </ResourceDictionary>
+        </FrameworkElement.Resources>
+      </ComboBox>
+    </StackPanel>
+    <StackPanel Orientation="Horizontal" Width="196">
+      <TextBlock Name="LYear" VerticalAlignment="Center" Margin="0,0,10,0" FontWeight="Bold" FontSize="15" Text="{Resx ResxName=ReCross.FE.Views.MovementFilterView, Key=L_Year}" />
+      <Button Name="BPrevious" Width="25" Height="25" BorderBrush="#00FFFFFF" ToolTip="Anterior" strillsUICommands:CommandBehavior.Event="Click" strillsUICommands:CommandBehavior.CommandParameter="-1" IsEnabled="{Binding Source={x:Static Application.Current}, Path=StateData.IsNotEditingMode, UpdateSourceTrigger=PropertyChanged}" strillsUICommands:CommandBehavior.Command="{Binding Source={StaticResource viewModelMovementFilter}, Path=CMDChangeYear}">
+        <Control.Background>
+          <ImageBrush ImageSource="..\Images\Previous.png" />
+        </Control.Background>
+      </Button>
+      <TextBox Name="TBYear" IsReadOnly="True" Width="70" Margin="5,0,5,0" Height="25" HorizontalAlignment="Left" FontSize="15" Text="{Binding Source={x:Static Application.Current}, Path=CurrentDataContext.DataFilters.CurrentYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding Source={x:Static Application.Current}, Path=StateData.IsNotEditingMode, UpdateSourceTrigger=PropertyChanged}" />
+      <Button Name="BNext" Width="25" Height="25" BorderBrush="#00FFFFFF" ToolTip="Seguinte" strillsUICommands:CommandBehavior.Event="Click" strillsUICommands:CommandBehavior.CommandParameter="1" IsEnabled="{Binding Source={x:Static Application.Current}, Path=StateData.IsNotEditingMode, UpdateSourceTrigger=PropertyChanged}" strillsUICommands:CommandBehavior.Command="{Binding Source={StaticResource viewModelMovementFilter}, Path=CMDChangeYear}">
+        <Control.Background>
+          <ImageBrush ImageSource="..\Images\Next.png" />
+        </Control.Background>
+      </Button>
+    </StackPanel>
+    <StackPanel Orientation="Horizontal" Width="120">
+      <TextBlock Name="LMonth" VerticalAlignment="Center" Margin="0,0,10,0" FontWeight="Bold" FontSize="15" Text="{Resx ResxName=ReCross.FE.Views.MovementFilterView, Key=L_Month}" />
+      <TextBox Name="TBMonth" IsReadOnly="True" Width="30" Margin="5,0,5,0" Height="25" HorizontalAlignment="Left" FontSize="15" IsEnabled="{Binding Source={x:Static Application.Current}, Path=StateData.IsNotEditingMode, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Source={x:Static Application.Current}, Path=CurrentDataContext.DataFilters.CurrentMonth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+    </StackPanel>
+    <StackPanel Width="78" VerticalAlignment="Center">
+      <Button Style="{StaticResource calendarButton}" strillsUICommands:CommandBehavior.CommandParameter="1">
+        <ContentControl.Content>
+          <StackPanel Width="60">
+            <TextBlock Style="{StaticResource calendarMonthTextBlock}" Text="{Resx ResxName=Strills.WPF.Localization.Resources.Calendar, Key=L_January_Short}" />
+            <TextBlock Style="{StaticResource calendarNumberTextBlock}" Text="1" />
+          </StackPanel>
+        </ContentControl.Content>
+      </Button>
+    </StackPanel>
+    <StackPanel Width="78" VerticalAlignment="Center">
+      <Button Style="{StaticResource calendarButton}" strillsUICommands:CommandBehavior.CommandParameter="2">
+        <ContentControl.Content>
+          <StackPanel Width="60">
+            <TextBlock Style="{StaticResource calendarMonthTextBlock}" Text="{Resx ResxName=Strills.WPF.Localization.Resources.Calendar, Key=L_February_Short}" />
+            <TextBlock Style="{StaticResource calendarNumberTextBlock}" Text="2" />
+          </StackPanel>
+        </ContentControl.Content>
+      </Button>
+    </StackPanel>
+    <StackPanel Width="78" VerticalAlignment="Center">
+      <Button Style="{StaticResource calendarButton}" strillsUICommands:CommandBehavior.CommandParameter="3">
+        <ContentControl.Content>
+          <StackPanel Width="60">
+            <TextBlock Style="{StaticResource calendarMonthTextBlock}" Text="{Resx ResxName=Strills.WPF.Localization.Resources.Calendar, Key=L_March_Short}" />
+            <TextBlock Style="{StaticResource calendarNumberTextBlock}" Text="3" />
+          </StackPanel>
+        </ContentControl.Content>
+      </Button>
+    </StackPanel>
+    <StackPanel Width="78" VerticalAlignment="Center">
+      <Button Style="{StaticResource calendarButton}" strillsUICommands:CommandBehavior.CommandParameter="4">
+        <ContentControl.Content>
+          <StackPanel Width="60">
+            <TextBlock Style="{StaticResource calendarMonthTextBlock}" Text="{Resx ResxName=Strills.WPF.Localization.Resources.Calendar, Key=L_April_Short}" />
+            <TextBlock Style="{StaticResource calendarNumberTextBlock}" Text="4" />
+          </StackPanel>
+        </ContentControl.Content>
+      </Button>
+    </StackPanel>
+    <StackPanel Width="78" VerticalAlignment="Center">
+      <Button Style="{StaticResource calendarButton}" strillsUICommands:CommandBehavior.CommandParameter="5">
+        <ContentControl.Content>
+          <StackPanel Width="60">
+            <TextBlock Style="{StaticResource calendarMonthTextBlock}" Text="{Resx ResxName=Strills.WPF.Localization.Resources.Calendar, Key=L_May_Short}" />
+            <TextBlock Style="{StaticResource calendarNumberTextBlock}" Text="5" />
+          </StackPanel>
+        </ContentControl.Content>
+      </Button>
+    </StackPanel>
+    <StackPanel Width="78" VerticalAlignment="Center">
+      <Button Style="{StaticResource calendarButton}" strillsUICommands:CommandBehavior.CommandParameter="6">
+        <ContentControl.Content>
+          <StackPanel Width="60">
+            <TextBlock Style="{StaticResource calendarMonthTextBlock}" Text="{Resx ResxName=Strills.WPF.Localization.Resources.Calendar, Key=L_June_Short}" />
+            <TextBlock Style="{StaticResource calendarNumberTextBlock}" Text="6" />
+          </StackPanel>
+        </ContentControl.Content>
+      </Button>
+    </StackPanel>
+    <StackPanel Width="78" VerticalAlignment="Center">
+      <Button Style="{StaticResource calendarButton}" strillsUICommands:CommandBehavior.CommandParameter="7">
+        <ContentControl.Content>
+          <StackPanel Width="60">
+            <TextBlock Style="{StaticResource calendarMonthTextBlock}" Text="{Resx ResxName=Strills.WPF.Localization.Resources.Calendar, Key=L_Jule_Short}" />
+            <TextBlock Style="{StaticResource calendarNumberTextBlock}" Text="7" />
+          </StackPanel>
+        </ContentControl.Content>
+      </Button>
+    </StackPanel>
+    <StackPanel Width="78" VerticalAlignment="Center">
+      <Button Style="{StaticResource calendarButton}" strillsUICommands:CommandBehavior.CommandParameter="8">
+        <ContentControl.Content>
+          <StackPanel Width="60">
+            <TextBlock Style="{StaticResource calendarMonthTextBlock}" Text="{Resx ResxName=Strills.WPF.Localization.Resources.Calendar, Key=L_August_Short}" />
+            <TextBlock Style="{StaticResource calendarNumberTextBlock}" Text="8" />
+          </StackPanel>
+        </ContentControl.Content>
+      </Button>
+    </StackPanel>
+    <StackPanel Width="78" VerticalAlignment="Center">
+      <Button Style="{StaticResource calendarButton}" strillsUICommands:CommandBehavior.CommandParameter="9">
+        <ContentControl.Content>
+          <StackPanel Width="60">
+            <TextBlock Style="{StaticResource calendarMonthTextBlock}" Text="{Resx ResxName=Strills.WPF.Localization.Resources.Calendar, Key=L_September_Short}" />
+            <TextBlock Style="{StaticResource calendarNumberTextBlock}" Text="9" />
+          </StackPanel>
+        </ContentControl.Content>
+      </Button>
+    </StackPanel>
+    <StackPanel Width="78" VerticalAlignment="Center">
+      <Button Style="{StaticResource calendarButton}" strillsUICommands:CommandBehavior.CommandParameter="10">
+        <ContentControl.Content>
+          <StackPanel Width="60">
+            <TextBlock Style="{StaticResource calendarMonthTextBlock}" Text="{Resx ResxName=Strills.WPF.Localization.Resources.Calendar, Key=L_October_Short}" />
+            <TextBlock Style="{StaticResource calendarNumberTextBlock}" Text="10" />
+          </StackPanel>
+        </ContentControl.Content>
+      </Button>
+    </StackPanel>
+    <StackPanel Width="78" VerticalAlignment="Center">
+      <Button Style="{StaticResource calendarButton}" strillsUICommands:CommandBehavior.CommandParameter="11">
+        <ContentControl.Content>
+          <StackPanel Width="60">
+            <TextBlock Style="{StaticResource calendarMonthTextBlock}" Text="{Resx ResxName=Strills.WPF.Localization.Resources.Calendar, Key=L_November_Short}" />
+            <TextBlock Style="{StaticResource calendarNumberTextBlock}" Text="11" />
+          </StackPanel>
+        </ContentControl.Content>
+      </Button>
+    </StackPanel>
+    <StackPanel Width="78" VerticalAlignment="Center">
+      <Button Style="{StaticResource calendarButton}" strillsUICommands:CommandBehavior.CommandParameter="12">
+        <ContentControl.Content>
+          <StackPanel Width="60">
+            <TextBlock Style="{StaticResource calendarMonthTextBlock}" Text="{Resx ResxName=Strills.WPF.Localization.Resources.Calendar, Key=L_December_Short}" />
+            <TextBlock Style="{StaticResource calendarNumberTextBlock}" Text="12" />
+          </StackPanel>
+        </ContentControl.Content>
+      </Button>
+    </StackPanel>
+  </WrapPanel>
+</strillsUIUserControls:UserControlFormBase>

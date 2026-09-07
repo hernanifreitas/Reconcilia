@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<strillsUIUserControls:UserControlGridBase x:Class="ReCross.FE.Views.ReconciliationResultViewGrid" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:strillsConverters="clr-namespace:Strills.WPF.Localization.Converters;assembly=Strills.WPF.Localization" xmlns:strillsUIUserControls="clr-namespace:Strills.WPF.UI.UserControls;assembly=Strills.WPF.UI" xmlns:strillsUICommands="clr-namespace:Strills.WPF.UI.Commands;assembly=Strills.WPF.UI" xmlns:models="clr-namespace:ReCross.BE.DataObjects;assembly=ReCross.BE" xmlns:viewModels="clr-namespace:ReCross.FE.ViewModels" Height="Auto" Width="Auto" xmlns:views="clr-namespace:ReCross.FE.Views" Loaded="UserControl_Loaded">
+  <FrameworkElement.Resources>
+    <ResourceDictionary>
+      <DataTemplate x:Key="columnBankAccount">
+        <Control Name="bankAccount" Focusable="False">
+          <Control.Template>
+            <ControlTemplate>
+              <TextBlock TextAlignment="Center" Text="{Binding Path=BankAccount.AccountNumber}" />
+            </ControlTemplate>
+          </Control.Template>
+        </Control>
+      </DataTemplate>
+      <DataTemplate x:Key="columnYear">
+        <Control Name="year" Focusable="False">
+          <Control.Template>
+            <ControlTemplate>
+              <TextBlock TextAlignment="Center" Text="{Binding Path=Year}" />
+            </ControlTemplate>
+          </Control.Template>
+        </Control>
+      </DataTemplate>
+      <DataTemplate x:Key="columnMonth">
+        <Control Name="month" Focusable="False">
+          <Control.Template>
+            <ControlTemplate>
+              <TextBlock TextAlignment="Center" Text="{Binding Path=Month}" />
+            </ControlTemplate>
+          </Control.Template>
+        </Control>
+      </DataTemplate>
+      <DataTemplate x:Key="columnReasonBalance">
+        <Control Name="reasonBalance" Focusable="False">
+          <Control.Template>
+            <ControlTemplate>
+              <TextBlock TextAlignment="Right" Text="{Binding Path=ReasonBalance, Converter={x:Static strillsConverters:MoneyConverter.Instance}, ConverterParameter=true}" />
+            </ControlTemplate>
+          </Control.Template>
+        </Control>
+        <DataTemplate.Triggers>
+          <DataTrigger Value="True" Binding="{Binding Path=IsEdited, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItemExtended}}}">
+            <Setter TargetName="reasonBalance" Property="Control.Template">
+              <Setter.Value>
+                <ControlTemplate>
+                  <TextBox TextAlignment="Right" Width="190" Text="{Binding UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, NotifyOnValidationError=True, Path=ReasonBalance, Converter={x:Static strillsConverters:MoneyConverter.Instance}}" Validation.Error="InvalidType_Error" />
+                </ControlTemplate>
+              </Setter.Value>
+            </Setter>
+          </DataTrigger>
+        </DataTemplate.Triggers>
+      </DataTemplate>
+      <DataTemplate x:Key="columnBankroll">
+        <Control Name="bankroll" Focusable="False">
+          <Control.Template>
+            <ControlTemplate>
+              <TextBlock TextAlignment="Right" Text="{Binding Path=Bankroll, Converter={x:Static strillsConverters:MoneyConverter.Instance}}" />
+            </ControlTemplate>
+          </Control.Template>
+        </Control>
+        <DataTemplate.Triggers>
+          <DataTrigger Value="True" Binding="{Binding Path=IsEdited, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItemExtended}}}">
+            <Setter TargetName="bankroll" Property="Control.Template">
+              <Setter.Value>
+                <ControlTemplate>
+                  <TextBox TextAlignment="Right" Width="190" Text="{Binding UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, NotifyOnValidationError=True, Path=Bankroll, Converter={x:Static strillsConverters:MoneyConverter.Instance}}" Validation.Error="InvalidType_Error" />
+                </ControlTemplate>
+              </Setter.Value>
+            </Setter>
+          </DataTrigger>
+        </DataTemplate.Triggers>
+      </DataTemplate>
+    </ResourceDictionary>
+  </FrameworkElement.Resources>
+  <StackPanel Style="{StaticResource entityGridStackPanel}">
+    <ListViewExtended Name="LVParametrization_ReconciliationResults" MaxHeight="370" ItemContainerStyle="{StaticResource itemStyle}" ItemsSource="{Binding}" CommandAddItem="{Binding Source={StaticResource viewModelReconciliationResult}, Path=CMDAddItem}" CommandEditItem="{Binding Source={StaticResource viewModelReconciliationResult}, Path=CMDEditItem}" CommandRemoveItem="{Binding Source={StaticResource viewModelReconciliationResult}, Path=CMDRemoveItem}" CommandConfirm="{Binding Source={StaticResource viewModelReconciliationResult}, Path=CMDConfirm}" CommandCancel="{Binding Source={StaticResource viewModelReconciliationResult}, Path=CMDCancel}">
+      <ListView.View>
+        <GridView ColumnHeaderTemplate="{StaticResource headerTemplateTransparent}" ColumnHeaderContainerStyle="{StaticResource gridViewHeaderStyle}">
+          <GridViewColumnExtended Width="290" CellTemplate="{StaticResource columnBankAccount}" SortPropertyName="BankAccount.AccountNumber" Header="{Resx ResxName=ReCross.FE.Views.ReconciliationResultViewGrid, Key=L_BankAccount}" />
+          <GridViewColumnExtended Width="80" CellTemplate="{StaticResource columnYear}" SortPropertyName="Year" IsDefaultSortColumn="True" Header="{Resx ResxName=ReCross.FE.Views.ReconciliationResultViewGrid, Key=L_Year}" />
+          <GridViewColumnExtended Width="60" CellTemplate="{StaticResource columnMonth}" SortPropertyName="Month" Header="{Resx ResxName=ReCross.FE.Views.ReconciliationResultViewGrid, Key=L_Month}" />
+          <GridViewColumnExtended Width="200" CellTemplate="{StaticResource columnReasonBalance}" SortPropertyName="ReasonBalance" Header="{Resx ResxName=ReCross.FE.Views.ReconciliationResultViewGrid, Key=L_ReasonBalance}" />
+          <GridViewColumnExtended Width="200" CellTemplate="{StaticResource columnBankroll}" SortPropertyName="Bankroll" Header="{Resx ResxName=ReCross.FE.Views.ReconciliationResultViewGrid, Key=L_Bankroll}" />
+          <GridViewColumn CellTemplate="{StaticResource operationsEditableGridViewCell}" Width="90" />
+        </GridView>
+      </ListView.View>
+    </ListViewExtended>
+  </StackPanel>
+</strillsUIUserControls:UserControlGridBase>

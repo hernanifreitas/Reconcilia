@@ -1,0 +1,7 @@
+C:\Projetos\Reconcilia\ReCross.FE-Fonte\CodeReason.Reports.dll\bin\Debug\net40\CodeReason.Reports.dll
+C:\Projetos\Reconcilia\ReCross.FE-Fonte\CodeReason.Reports.dll\bin\Debug\net40\CodeReason.Reports.pdb
+C:\Projetos\Reconcilia\ReCross.FE-Fonte\CodeReason.Reports.dll\obj\Debug\net40\CodeReason.Reports.csproj.AssemblyReference.cache
+C:\Projetos\Reconcilia\ReCross.FE-Fonte\CodeReason.Reports.dll\obj\Debug\net40\CodeReason.Reports.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projetos\Reconcilia\ReCross.FE-Fonte\CodeReason.Reports.dll\obj\Debug\net40\CodeReason.Reports.csproj.CoreCompileInputs.cache
+C:\Projetos\Reconcilia\ReCross.FE-Fonte\CodeReason.Reports.dll\obj\Debug\net40\CodeReason.Reports.dll
+C:\Projetos\Reconcilia\ReCross.FE-Fonte\CodeReason.Reports.dll\obj\Debug\net40\CodeReason.Reports.pdb

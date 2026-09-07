@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserControl x:Class="ReCross.FE.Views.BankAccountViewGrid" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:viewModels="clr-namespace:ReCross.FE.ViewModels" xmlns:strillsUIUserControls="clr-namespace:Strills.WPF.UI.UserControls;assembly=Strills.WPF.UI" xmlns:strillsUICommands="clr-namespace:Strills.WPF.UI.Commands;assembly=Strills.WPF.UI" Height="Auto" Width="Auto" xmlns:views="clr-namespace:ReCross.FE.Views" Loaded="UserControl_Loaded">
+  <StackPanel Style="{StaticResource entityGridStackPanel}">
+    <ListViewExtended Name="LVBankAccounts" ItemsSource="{Binding}" CommandAddItem="{Binding Source={StaticResource viewModelBankAccount}, Path=CMDAddItem}" CommandEditItem="{Binding Source={StaticResource viewModelBankAccount}, Path=CMDEditItem}" CommandRemoveItem="{Binding Source={StaticResource viewModelBankAccount}, Path=CMDRemoveItem}">
+      <strillsUICommands:CommandBehaviorCollection.Behaviors>
+        <strillsUICommands:BehaviorBinding Event="MouseDoubleClick" Command="{Binding Source={StaticResource viewModelBankAccount}, Path=CMDViewItem}" />
+        <strillsUICommands:BehaviorBinding Event="MouseDoubleClick" Command="strillsUIUserControls:UserControlItemBase.CMDViewItem" />
+      </strillsUICommands:CommandBehaviorCollection.Behaviors>
+      <ListView.View>
+        <GridView ColumnHeaderTemplate="{StaticResource headerTemplateTransparent}" ColumnHeaderContainerStyle="{StaticResource gridViewHeaderStyle}">
+          <GridViewColumnExtended Width="200" SortPropertyName="BankEntity.ShortName" Header="{Resx ResxName=ReCross.FE.Views.BankAccountViewGrid, Key=L_BankEntity}" DisplayMemberBinding="{Binding Path=BankEntity.ShortName}" />
+          <GridViewColumnExtended Width="300" SortPropertyName="BankBranch" Header="{Resx ResxName=ReCross.FE.Views.BankAccountViewGrid, Key=L_BankBranch}" DisplayMemberBinding="{Binding Path=BankBranch}" />
+          <GridViewColumnExtended Width="340" SortPropertyName="AccountNumber" Header="{Resx ResxName=ReCross.FE.Views.BankAccountViewGrid, Key=L_AccountNumber}" DisplayMemberBinding="{Binding Path=AccountNumber}" />
+          <GridViewColumn HeaderTemplate="{StaticResource operationsGridViewHeader}" CellTemplate="{StaticResource operationsGridViewCell}" />
+        </GridView>
+      </ListView.View>
+    </ListViewExtended>
+  </StackPanel>
+</UserControl>

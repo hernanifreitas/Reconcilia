@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserControlItemBase x:Class="ReCross.FE.Views.BankAccountView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:viewModels="clr-namespace:ReCross.FE.ViewModels" xmlns:views="clr-namespace:ReCross.FE.Views" xmlns:strillsUIControls="clr-namespace:Strills.WPF.UI.Controls;assembly=Strills.WPF.UI" xmlns:strillsUICommands="clr-namespace:Strills.WPF.UI.Commands;assembly=Strills.WPF.UI" Height="Auto" Width="Auto" Loaded="UserControl_Loaded">
+  <FrameworkElement.DataContext>
+    <MultiBinding Converter="{x:Static viewModels:BankAccountsConverter.Instance}" ConverterParameter="{StaticResource viewModelBankAccount}">
+      <Binding Source="{x:Static Application.Current}" Path="CurrentDataContext.DataFilters.CurrentEntity" />
+    </MultiBinding>
+  </FrameworkElement.DataContext>
+  <StackPanel>
+    <StackPanel Name="SPItemList" Style="{StaticResource itemListStackPanel}">
+      <Border Style="{StaticResource entityViewBorder}">
+        <WrapPanel Style="{StaticResource itemListWrapPanel}">
+          <views:BankAccountViewGrid />
+        </WrapPanel>
+      </Border>
+    </StackPanel>
+    <StackPanel Name="SPItem" Style="{StaticResource itemStackPanel}">
+      <Border Style="{StaticResource entityViewBorder}">
+        <views:BankAccountViewForm />
+      </Border>
+    </StackPanel>
+  </StackPanel>
+</UserControlItemBase>

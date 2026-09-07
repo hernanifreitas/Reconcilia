@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<strillsUIUserControls:UserControlItemBase x:Class="ReCross.FE.Views.ReconciliationView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:strillsConverters="clr-namespace:Strills.WPF.Localization.Converters;assembly=Strills.WPF.Localization" xmlns:strillsUIUserControls="clr-namespace:Strills.WPF.UI.UserControls;assembly=Strills.WPF.UI" xmlns:strillsUICommands="clr-namespace:Strills.WPF.UI.Commands;assembly=Strills.WPF.UI" xmlns:viewModels="clr-namespace:ReCross.FE.ViewModels" xmlns:views="clr-namespace:ReCross.FE.Views" Height="Auto" Width="Auto" DataContext="{Binding Source={StaticResource viewModelReconciliation}}" Loaded="UserControl_Loaded">
+  <FrameworkElement.Resources>
+    <ResourceDictionary>
+      <Style x:Key="functionButton" TargetType="{x:Type Button}" BasedOn="{StaticResource button}">
+        <Setter Property="Width" Value="50" />
+        <Setter Property="Height" Value="50" />
+        <Setter Property="Margin" Value="5,0,5,0" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="BorderBrush" Value="#00FFFFFF" />
+      </Style>
+    </ResourceDictionary>
+  </FrameworkElement.Resources>
+  <StackPanel>
+    <StackPanel Name="SPItemList" Style="{StaticResource itemListStackPanel}">
+      <Border Style="{StaticResource entityViewBorder}">
+        <WrapPanel Orientation="Horizontal" Margin="10" Height="500" Width="960" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+          <views:MovementFilterView x:Name="filterView" />
+          <StackPanel Orientation="Horizontal">
+            <views:AccountMovViewGrid>
+              <FrameworkElement.DataContext>
+                <MultiBinding Converter="{x:Static viewModels:AccountMovConverter.Instance}" ConverterParameter="{StaticResource viewModelReconciliation}">
+                  <Binding Source="{x:Static Application.Current}" Path="CurrentDataContext.DataFilters.HasDataSelected" UpdateSourceTrigger="PropertyChanged" />
+                  <Binding Source="{x:Static Application.Current}" Path="CurrentDataContext.DataFilters.CurrentBankAccount" />
+                  <Binding Source="{StaticResource viewModelReconciliation}" Mode="TwoWay" Path="NotifyBindings.NotifyAccountMov" UpdateSourceTrigger="PropertyChanged" />
+                </MultiBinding>
+              </FrameworkElement.DataContext>
+            </views:AccountMovViewGrid>
+            <DockPanel Height="350">
+              <StackPanel DockPanel.Dock="Top" Orientation="Vertical">
+                <UIElement.Visibility>
+                  <MultiBinding Converter="{x:Static viewModels:ReconciliationForbiddenConverter.Instance}" ConverterParameter="{StaticResource viewModelReconciliation}">
+                    <Binding Source="{x:Static Application.Current}" Path="CurrentDataContext.DataFilters.HasDataSelected" UpdateSourceTrigger="PropertyChanged" />
+                    <Binding Source="{x:Static Application.Current}" Path="CurrentDataContext.DataFilters.CurrentBankAccount" />
+                  </MultiBinding>
+                </UIElement.Visibility>
+                <Button Name="BAutoLink" Style="{StaticResource functionButton}" VerticalAlignment="Top" ToolTip="Ligar movimentos contabilísticos com movimentos bancários automaticamente por valor (1 : 1)" Command="{Binding Source={StaticResource viewModelReconciliation}, Path=CMDAutoLink}" Visibility="{Binding Source={x:Static Application.Current}, Path=CurrentDataContext.DataFilters.HasDataSelected, Converter={x:Static viewModels:ReconciliationClosedAutoConverter.Instance}, ConverterParameter={StaticResource viewModelReconciliation}, UpdateSourceTrigger=PropertyChanged}">
+                  <Control.Background>
+                    <ImageBrush ImageSource="..\Images\AutoLink.png" />
+                  </Control.Background>
+                </Button>
+                <Button Name="BLink" Style="{StaticResource functionButton}" VerticalAlignment="Top" ToolTip="Ligar movimento(s) contabilístico com movimento(s) bancário" Command="{Binding Source={StaticResource viewModelReconciliation}, Path=CMDLink}" Visibility="{Binding Source={x:Static Application.Current}, Path=CurrentDataContext.DataFilters.HasDataSelected, Converter={x:Static viewModels:ReconciliationClosedConverter.Instance}, ConverterParameter={StaticResource viewModelReconciliation}, UpdateSourceTrigger=PropertyChanged}">
+                  <Control.Background>
+                    <ImageBrush ImageSource="..\Images\Link.png" />
+                  </Control.Background>
+                </Button>
+                <Button Name="BUncheck" Style="{StaticResource functionButton}" VerticalAlignment="Top" ToolTip="Remover todas os movimentos seleccionados (bancários e contabilísticos)" Command="{Binding Source={StaticResource viewModelReconciliation}, Path=CMDUncheck}" Visibility="{Binding Source={x:Static Application.Current}, Path=CurrentDataContext.DataFilters.HasDataSelected, Converter={x:Static viewModels:ReconciliationClosedConverter.Instance}, ConverterParameter={StaticResource viewModelReconciliation}, UpdateSourceTrigger=PropertyChanged}">
+                  <Control.Background>
+                    <ImageBrush ImageSource="..\Images\Uncheck.png" />
+                  </Control.Background>
+                </Button>
+                <Button Name="BCalculate" Style="{StaticResource functionButton}" VerticalAlignment="Top" ToolTip="Saldo Razão + Soma algébrica dos créditos e débitos - Saldo Bancário = ?" Command="{Binding Source={StaticResource viewModelReconciliation}, Path=CMDCalculate}" Visibility="{Binding Source={x:Static Application.Current}, Path=CurrentDataContext.DataFilters.HasDataSelected, Converter={x:Static viewModels:ReconciliationClosedConverter.Instance}, ConverterParameter={StaticResource viewModelReconciliation}, UpdateSourceTrigger=PropertyChanged}">
+                  <Control.Background>
+                    <ImageBrush ImageSource="..\Images\Calculate.png" />
+                  </Control.Background>
+                </Button>
+              </StackPanel>
+              <Button Name="BSwitch" DockPanel.Dock="Bottom" Style="{StaticResource functionButton}" VerticalAlignment="Top" ToolTip="Ver Reconciliação já feita" Command="strillsUIUserControls:UserControlItemBase.CMDViewItem">
+                <Control.Background>
+                  <ImageBrush ImageSource="..\Images\Switch.png" />
+                </Control.Background>
+              </Button>
+              <StackPanel DockPanel.Dock="Bottom" Orientation="Vertical">
+                <UIElement.Visibility>
+                  <MultiBinding Converter="{x:Static viewModels:ReconciliationForbiddenConverter.Instance}" ConverterParameter="{StaticResource viewModelReconciliation}">
+                    <Binding Source="{x:Static Application.Current}" Path="CurrentDataContext.DataFilters.HasDataSelected" UpdateSourceTrigger="PropertyChanged" />
+                    <Binding Source="{x:Static Application.Current}" Path="CurrentDataContext.DataFilters.CurrentBankAccount" />
+                  </MultiBinding>
+                </UIElement.Visibility>
+                <Button Name="BPrint" Style="{StaticResource functionButton}" VerticalAlignment="Bottom" ToolTip="Imprimir mapa de reconciliação" Command="{Binding Source={StaticResource viewModelReconciliation}, Path=CMDPrint}">
+                  <Control.Background>
+                    <ImageBrush ImageSource="..\Images\Print.png" />
+                  </Control.Background>
+                  <UIElement.Visibility>
+                    <MultiBinding Converter="{x:Static viewModels:ReconciliationDoneConverter.Instance}" ConverterParameter="{StaticResource viewModelReconciliation}">
+                      <Binding Source="{x:Static Application.Current}" Path="CurrentDataContext.DataFilters.HasDataSelected" UpdateSourceTrigger="PropertyChanged" />
+                    </MultiBinding>
+                  </UIElement.Visibility>
+                </Button>
+                <Button Name="BClose" Style="{StaticResource functionButton}" VerticalAlignment="Bottom" ToolTip="Fechar reconciliação e salvar documento" Command="{Binding Source={StaticResource viewModelReconciliation}, Path=CMDClose}">
+                  <Control.Background>
+                    <ImageBrush ImageSource="..\Images\Close.png" />
+                  </Control.Background>
+                  <UIElement.Visibility>
+                    <MultiBinding Converter="{x:Static viewModels:ReconciliationCanCloseConverter.Instance}" ConverterParameter="{StaticResource viewModelReconciliation}">
+                      <Binding Source="{x:Static Application.Current}" Path="CurrentDataContext.DataFilters.HasDataSelected" UpdateSourceTrigger="PropertyChanged" />
+                      <Binding Source="{StaticResource viewModelReconciliation}" Path="NotifyBindings.NotifyBankMovSum" Converter="{x:Static viewModels:BankMovSumConverter.Instance}" ConverterParameter="{StaticResource viewModelReconciliation}" Mode="OneWay" UpdateSourceTrigger="PropertyChanged" />
+                      <Binding Source="{StaticResource viewModelReconciliation}" Path="NotifyBindings.NotifyAccountMovSum" Converter="{x:Static viewModels:AccountMovSumConverter.Instance}" ConverterParameter="{StaticResource viewModelReconciliation}" Mode="OneWay" UpdateSourceTrigger="PropertyChanged" />
+                    </MultiBinding>
+                  </UIElement.Visibility>
+                </Button>
+                <Button Name="BUnclose" Style="{StaticResource functionButton}" VerticalAlignment="Bottom" ToolTip="Reabrir reconciliação fechada" Command="{Binding Source={StaticResource viewModelReconciliation}, Path=CMDUnclose}">
+                  <Control.Background>
+                    <ImageBrush ImageSource="..\Images\Unclose.png" />
+                  </Control.Background>
+                  <UIElement.Visibility>
+                    <MultiBinding Converter="{x:Static viewModels:ReconciliationUndoneConverter.Instance}" ConverterParameter="{StaticResource viewModelReconciliation}">
+                      <Binding Source="{x:Static Application.Current}" Path="CurrentDataContext.DataFilters.HasDataSelected" UpdateSourceTrigger="PropertyChanged" />
+                      <Binding Source="{x:Static Application.Current}" Path="CurrentDataContext.DataFilters.CurrentBankAccount" />
+                    </MultiBinding>
+                  </UIElement.Visibility>
+                </Button>
+              </StackPanel>
+            </DockPanel>
+            <views:BankMovViewGrid>
+              <FrameworkElement.DataContext>
+                <MultiBinding Converter="{x:Static viewModels:BankMovConverter.Instance}" ConverterParameter="{StaticResource viewModelReconciliation}">
+                  <Binding Source="{x:Static Application.Current}" Path="CurrentDataContext.DataFilters.HasDataSelected" UpdateSourceTrigger="PropertyChanged" />
+                  <Binding Source="{x:Static Application.Current}" Path="CurrentDataContext.DataFilters.CurrentBankAccount" />
+                  <Binding Source="{StaticResource viewModelReconciliation}" Mode="TwoWay" Path="NotifyBindings.NotifyBankMov" UpdateSourceTrigger="PropertyChanged" />
+                </MultiBinding>
+              </FrameworkElement.DataContext>
+            </views:BankMovViewGrid>
+          </StackPanel>
+          <StackPanel Orientation="Horizontal">
+            <UIElement.Visibility>
+              <MultiBinding Converter="{x:Static viewModels:ReconciliationForbiddenConverter.Instance}" ConverterParameter="{StaticResource viewModelReconciliation}">
+                <Binding Source="{x:Static Application.Current}" Path="CurrentDataContext.DataFilters.HasDataSelected" UpdateSourceTrigger="PropertyChanged" />
+                <Binding Source="{x:Static Application.Current}" Path="CurrentDataContext.DataFilters.CurrentBankAccount" />
+              </MultiBinding>
+            </UIElement.Visibility>
+            <FrameworkElement.DataContext>
+              <MultiBinding Converter="{x:Static viewModels:ReconciliationResultConverter.Instance}" ConverterParameter="{StaticResource viewModelReconciliation}">
+                <Binding Source="{x:Static Application.Current}" Path="CurrentDataContext.DataFilters.CurrentBankAccount" />
+                <Binding Source="{x:Static Application.Current}" Path="CurrentDataContext.DataFilters.HasDataSelected" UpdateSourceTrigger="PropertyChanged" />
+                <Binding Source="{StaticResource viewModelReconciliation}" Mode="TwoWay" Path="NotifyBindings.NotifyAccountMov" UpdateSourceTrigger="PropertyChanged" />
+              </MultiBinding>
+            </FrameworkElement.DataContext>
+            <StackPanel Orientation="Horizontal" Width="285">
+              <TextBlock Name="LReasonBalance" Width="130" VerticalAlignment="Center" HorizontalAlignment="Right" TextAlignment="Right" Margin="0,0,5,0" FontWeight="Bold" FontSize="15" Text="{Resx ResxName=ReCross.FE.Views.ReconciliationView, Key=L_ReasonBalance}" />
+              <TextBox Name="TBReasonBalance" IsReadOnly="True" Width="125" Margin="5,0,5,0" Height="25" HorizontalAlignment="Left" TextAlignment="Right" FontSize="15" Text="{Binding Path=ReasonBalance, Converter={x:Static strillsConverters:MoneyConverter.Instance}}" />
+            </StackPanel>
+            <StackPanel Width="400" Orientation="Horizontal" DataContext="{Binding Source={StaticResource viewModelReconciliation}}" Visibility="{Binding Source={x:Static Application.Current}, Path=CurrentDataContext.DataFilters.HasDataSelected, Converter={x:Static viewModels:ReconciliationClosedConverter.Instance}, ConverterParameter={StaticResource viewModelReconciliation}, UpdateSourceTrigger=PropertyChanged}">
+              <TextBox Name="TBAccountMovSum" IsReadOnly="True" Width="115" Margin="0" Height="25" TextAlignment="Right" FontSize="15" Foreground="{Binding Path=Text, Converter={x:Static strillsConverters:MoneyColorConverter.Instance}, RelativeSource={RelativeSource Self}}" Text="{Binding Path=NotifyBindings.NotifyAccountMovSum, Converter={x:Static viewModels:AccountMovSumConverter.Instance}, ConverterParameter={StaticResource viewModelReconciliation}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+              <TextBox Name="LDifference" IsReadOnly="True" Margin="10,0,10,0" Width="135" Height="25" TextAlignment="Right" FontSize="15" Foreground="#FF0000FF" ToolTip="Para casar faltam:" Text="{Binding Path=NotifyBindings.NotifyMovementChecked, Converter={x:Static viewModels:MatchDifferenceConverter.Instance}, ConverterParameter={StaticResource viewModelReconciliation}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <TextBox Name="TBBankMovSum" IsReadOnly="True" Width="115" Margin="0" Height="25" TextAlignment="Right" FontSize="15" Foreground="{Binding Path=Text, Converter={x:Static strillsConverters:MoneyColorConverter.Instance}, RelativeSource={RelativeSource Self}}" Text="{Binding Path=NotifyBindings.NotifyBankMovSum, Converter={x:Static viewModels:BankMovSumConverter.Instance}, ConverterParameter={StaticResource viewModelReconciliation}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Width="270">
+              <TextBox Name="TBBankroll" IsReadOnly="True" Width="125" Margin="5,0,5,0" Height="25" HorizontalAlignment="Left" TextAlignment="Right" FontSize="15" Text="{Binding Path=Bankroll, Converter={x:Static strillsConverters:MoneyConverter.Instance}}" />
+              <TextBlock Name="LBankroll" Width="130" VerticalAlignment="Center" HorizontalAlignment="Left" TextAlignment="Left" Margin="5,0,0,0" FontWeight="Bold" FontSize="15" Text="{Resx ResxName=ReCross.FE.Views.ReconciliationView, Key=L_Bankroll}" />
+            </StackPanel>
+          </StackPanel>
+        </WrapPanel>
+      </Border>
+    </StackPanel>
+    <StackPanel Name="SPItem" Style="{StaticResource itemStackPanel}">
+      <Border Style="{StaticResource entityViewBorder}">
+        <WrapPanel Style="{StaticResource itemListWrapPanel}">
+          <views:ReconciliationViewGrid>
+            <FrameworkElement.DataContext>
+              <MultiBinding Converter="{x:Static viewModels:ReconciliationConverter.Instance}" ConverterParameter="{StaticResource viewModelReconciliation}">
+                <Binding Source="{x:Static Application.Current}" Path="CurrentDataContext.DataFilters.CurrentBankAccount" />
+                <Binding Source="{x:Static Application.Current}" Path="CurrentDataContext.DataFilters.HasDataSelected" UpdateSourceTrigger="PropertyChanged" />
+                <Binding Source="{StaticResource viewModelReconciliation}" Mode="TwoWay" Path="NotifyBindings.NotifyReconciliation" UpdateSourceTrigger="PropertyChanged" />
+              </MultiBinding>
+            </FrameworkElement.DataContext>
+          </views:ReconciliationViewGrid>
+          <StackPanel VerticalAlignment="Top" Orientation="Vertical">
+            <Button Name="BSwitchBack" Style="{StaticResource functionButton}" VerticalAlignment="Top" ToolTip="Voltar a Movimentos" Command="strillsUIUserControls:UserControlItemBase.CMDViewItemList">
+              <Control.Background>
+                <ImageBrush ImageSource="..\Images\Switch.png" />
+              </Control.Background>
+            </Button>
+            <Button Name="BPrintMovements" Style="{StaticResource functionButton}" VerticalAlignment="Bottom" ToolTip="Imprimir movimentos reconciliados" Command="{Binding Source={StaticResource viewModelReconciliation}, Path=CMDPrintMovements}">
+              <Control.Background>
+                <ImageBrush ImageSource="..\Images\Print.png" />
+              </Control.Background>
+              <UIElement.Visibility>
+                <MultiBinding Converter="{x:Static viewModels:ReconciliationDoneConverter.Instance}" ConverterParameter="{StaticResource viewModelReconciliation}">
+                  <Binding Source="{x:Static Application.Current}" Path="CurrentDataContext.DataFilters.HasDataSelected" UpdateSourceTrigger="PropertyChanged" />
+                </MultiBinding>
+              </UIElement.Visibility>
+            </Button>
+          </StackPanel>
+        </WrapPanel>
+      </Border>
+    </StackPanel>
+  </StackPanel>
+</strillsUIUserControls:UserControlItemBase>

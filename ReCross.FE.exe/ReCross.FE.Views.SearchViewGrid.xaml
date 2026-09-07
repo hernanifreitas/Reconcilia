@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<strillsUIUserControls:UserControlGridBase x:Class="ReCross.FE.Views.SearchViewGrid" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:strillsConverters="clr-namespace:Strills.WPF.Localization.Converters;assembly=Strills.WPF.Localization" xmlns:strillsUIUserControls="clr-namespace:Strills.WPF.UI.UserControls;assembly=Strills.WPF.UI" xmlns:strillsUICommands="clr-namespace:Strills.WPF.UI.Commands;assembly=Strills.WPF.UI" xmlns:models="clr-namespace:ReCross.BE.DataObjects;assembly=ReCross.BE" xmlns:viewModels="clr-namespace:ReCross.FE.ViewModels" Height="Auto" Width="Auto" xmlns:views="clr-namespace:ReCross.FE.Views" Loaded="UserControl_Loaded">
+  <FrameworkElement.Resources>
+    <ResourceDictionary>
+      <DataTemplate x:Key="columnValueDate">
+        <Control Name="valueDate" Focusable="False">
+          <Control.Template>
+            <ControlTemplate>
+              <StackPanel>
+                <TextBlock TextAlignment="Center" Text="{Binding Path=ValueDate, Converter={x:Static strillsConverters:DateConverter.Instance}}" />
+              </StackPanel>
+            </ControlTemplate>
+          </Control.Template>
+        </Control>
+      </DataTemplate>
+      <DataTemplate x:Key="columnDebitAmount">
+        <Control Name="debitAmount" Focusable="False">
+          <Control.Template>
+            <ControlTemplate>
+              <TextBlock TextAlignment="Right" Text="{Binding Path=DebitAmount, Converter={x:Static strillsConverters:MoneyConverter.Instance}, ConverterParameter=true}" />
+            </ControlTemplate>
+          </Control.Template>
+        </Control>
+      </DataTemplate>
+      <DataTemplate x:Key="columnCreditAmount">
+        <Control Name="creditAmount" Focusable="False">
+          <Control.Template>
+            <ControlTemplate>
+              <TextBlock TextAlignment="Right" Text="{Binding Path=CreditAmount, Converter={x:Static strillsConverters:MoneyConverter.Instance}}" />
+            </ControlTemplate>
+          </Control.Template>
+        </Control>
+      </DataTemplate>
+    </ResourceDictionary>
+  </FrameworkElement.Resources>
+  <StackPanel Style="{StaticResource entityGridStackPanel}">
+    <ListViewExtended Name="LVSearch" MaxHeight="335" ItemContainerStyle="{StaticResource itemStyle}" ItemsSource="{Binding}">
+      <ListView.View>
+        <GridView ColumnHeaderTemplate="{StaticResource headerTemplateTransparent}" ColumnHeaderContainerStyle="{StaticResource gridViewHeaderStyle}">
+          <GridViewColumnExtended Width="60" SortPropertyName="MovementType" IsDefaultSortColumn="True" Header="{Resx ResxName=ReCross.FE.Views.SearchViewGrid, Key=L_MovementType}" DisplayMemberBinding="{Binding Path=MovementType}" />
+          <GridViewColumnExtended Width="60" SortPropertyName="BankAccount.BankEntity.ShortName" Header="{Resx ResxName=ReCross.FE.Views.SearchViewGrid, Key=L_BankEntity}" DisplayMemberBinding="{Binding Path=BankAccount.BankEntity.ShortName}" />
+          <GridViewColumnExtended Width="150" SortPropertyName="BankAccount.Description" Header="{Resx ResxName=ReCross.FE.Views.SearchViewGrid, Key=L_BankAccount}" DisplayMemberBinding="{Binding Path=BankAccount.Description}" />
+          <GridViewColumnExtended Width="110" CellTemplate="{StaticResource columnValueDate}" SortPropertyName="ValueDate" Header="{Resx ResxName=ReCross.FE.Views.SearchViewGrid, Key=L_ValueDate}" />
+          <GridViewColumnExtended Width="150" CellTemplate="{StaticResource columnDebitAmount}" SortPropertyName="DebitAmount" Header="{Resx ResxName=ReCross.FE.Views.SearchViewGrid, Key=L_DebitAmount}" />
+          <GridViewColumnExtended Width="150" CellTemplate="{StaticResource columnCreditAmount}" SortPropertyName="CreditAmount" Header="{Resx ResxName=ReCross.FE.Views.SearchViewGrid, Key=L_CreditAmount}" />
+          <GridViewColumnExtended Width="260" SortPropertyName="Description" Header="{Resx ResxName=ReCross.FE.Views.SearchViewGrid, Key=L_Description}" DisplayMemberBinding="{Binding Path=Description}" />
+          <GridViewColumn CellTemplate="{StaticResource operationsEditableGridViewCell}" />
+        </GridView>
+      </ListView.View>
+    </ListViewExtended>
+  </StackPanel>
+</strillsUIUserControls:UserControlGridBase>

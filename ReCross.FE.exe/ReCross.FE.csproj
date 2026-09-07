@@ -1,0 +1,143 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <AssemblyName>ReCross.FE</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <OutputType>WinExe</OutputType>
+    <UseWPF>True</UseWPF>
+    <TargetFramework>net40</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>14.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+    <RootNamespace />
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="images\configuration.png" />
+    <None Remove="images\mcustomers.jpg" />
+    <None Remove="images\read.png" />
+    <None Remove="images\previous.png" />
+    <None Remove="images\mbankentities.jpg" />
+    <None Remove="images\mbankaccounts.jpg" />
+    <None Remove="images\add.png" />
+    <None Remove="images\unclose.png" />
+    <None Remove="images\next.png" />
+    <None Remove="images\about.png" />
+    <None Remove="images\cancel.png" />
+    <None Remove="images\remove.png" />
+    <None Remove="images\msearch.jpg" />
+    <None Remove="images\check.png" />
+    <None Remove="images\save.png" />
+    <None Remove="images\user.png" />
+    <None Remove="images\musers.jpg" />
+    <None Remove="images\select.png" />
+    <None Remove="images\logout.png" />
+    <None Remove="images\uncheck.png" />
+    <None Remove="images\autolink.png" />
+    <None Remove="images\edit.png" />
+    <None Remove="images\calculate.png" />
+    <None Remove="images\background.png" />
+    <None Remove="images\language_pt.png" />
+    <None Remove="images\maccountmovements.jpg" />
+    <None Remove="images\confirm.png" />
+    <None Remove="images\switch.png" />
+    <None Remove="images\mbankmovements.jpg" />
+    <None Remove="images\close.png" />
+    <None Remove="images\unlink.png" />
+    <None Remove="images\folder.png" />
+    <None Remove="images\language_en.png" />
+    <None Remove="images\link.png" />
+    <None Remove="images\search.png" />
+    <None Remove="images\password.png" />
+    <None Remove="images\mreconciliations.jpg" />
+    <None Remove="images\reconcilia.ico" />
+    <None Remove="images\print.png" />
+    <None Remove="images\bgcalendar.png" />
+    <None Remove="images\mparametrization.jpg" />
+    <EmbeddedResource Include="images\configuration.png" LogicalName="images/configuration.png" />
+    <EmbeddedResource Include="images\mcustomers.jpg" LogicalName="images/mcustomers.jpg" />
+    <EmbeddedResource Include="images\read.png" LogicalName="images/read.png" />
+    <EmbeddedResource Include="images\previous.png" LogicalName="images/previous.png" />
+    <EmbeddedResource Include="images\mbankentities.jpg" LogicalName="images/mbankentities.jpg" />
+    <EmbeddedResource Include="images\mbankaccounts.jpg" LogicalName="images/mbankaccounts.jpg" />
+    <EmbeddedResource Include="images\add.png" LogicalName="images/add.png" />
+    <EmbeddedResource Include="images\unclose.png" LogicalName="images/unclose.png" />
+    <EmbeddedResource Include="images\next.png" LogicalName="images/next.png" />
+    <EmbeddedResource Include="images\about.png" LogicalName="images/about.png" />
+    <EmbeddedResource Include="images\cancel.png" LogicalName="images/cancel.png" />
+    <EmbeddedResource Include="images\remove.png" LogicalName="images/remove.png" />
+    <EmbeddedResource Include="images\msearch.jpg" LogicalName="images/msearch.jpg" />
+    <EmbeddedResource Include="images\check.png" LogicalName="images/check.png" />
+    <EmbeddedResource Include="images\save.png" LogicalName="images/save.png" />
+    <EmbeddedResource Include="images\user.png" LogicalName="images/user.png" />
+    <EmbeddedResource Include="images\musers.jpg" LogicalName="images/musers.jpg" />
+    <EmbeddedResource Include="images\select.png" LogicalName="images/select.png" />
+    <EmbeddedResource Include="images\logout.png" LogicalName="images/logout.png" />
+    <EmbeddedResource Include="images\uncheck.png" LogicalName="images/uncheck.png" />
+    <EmbeddedResource Include="images\autolink.png" LogicalName="images/autolink.png" />
+    <EmbeddedResource Include="images\edit.png" LogicalName="images/edit.png" />
+    <EmbeddedResource Include="images\calculate.png" LogicalName="images/calculate.png" />
+    <EmbeddedResource Include="images\background.png" LogicalName="images/background.png" />
+    <EmbeddedResource Include="images\language_pt.png" LogicalName="images/language_pt.png" />
+    <EmbeddedResource Include="images\maccountmovements.jpg" LogicalName="images/maccountmovements.jpg" />
+    <EmbeddedResource Include="images\confirm.png" LogicalName="images/confirm.png" />
+    <EmbeddedResource Include="images\switch.png" LogicalName="images/switch.png" />
+    <EmbeddedResource Include="images\mbankmovements.jpg" LogicalName="images/mbankmovements.jpg" />
+    <EmbeddedResource Include="images\close.png" LogicalName="images/close.png" />
+    <EmbeddedResource Include="images\unlink.png" LogicalName="images/unlink.png" />
+    <EmbeddedResource Include="images\folder.png" LogicalName="images/folder.png" />
+    <EmbeddedResource Include="images\language_en.png" LogicalName="images/language_en.png" />
+    <EmbeddedResource Include="images\link.png" LogicalName="images/link.png" />
+    <EmbeddedResource Include="images\search.png" LogicalName="images/search.png" />
+    <EmbeddedResource Include="images\password.png" LogicalName="images/password.png" />
+    <EmbeddedResource Include="images\mreconciliations.jpg" LogicalName="images/mreconciliations.jpg" />
+    <EmbeddedResource Include="images\reconcilia.ico" LogicalName="images/reconcilia.ico" />
+    <EmbeddedResource Include="images\print.png" LogicalName="images/print.png" />
+    <EmbeddedResource Include="images\bgcalendar.png" LogicalName="images/bgcalendar.png" />
+    <EmbeddedResource Include="images\mparametrization.jpg" LogicalName="images/mparametrization.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Strills.WPF.UI">
+      <HintPath>..\..\ReCross.FE_1_0_1_11\Strills.WPF.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="ReCross.BE">
+      <HintPath>..\..\ReCross.FE_1_0_1_11\ReCross.BE.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="Strills.WPF.Localization">
+      <HintPath>..\..\ReCross.FE_1_0_1_11\Strills.WPF.Localization.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="Strills.WPF.Reports">
+      <HintPath>..\..\ReCross.FE_1_0_1_11\Strills.WPF.Reports.dll</HintPath>
+    </Reference>
+    <Reference Include="ReachFramework" />
+    <Reference Include="FluidKit">
+      <HintPath>..\..\ReCross.FE_1_0_1_11\FluidKit.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="Strills.WPF.Data">
+      <HintPath>..\..\ReCross.FE_1_0_1_11\Strills.WPF.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Strills.WPF.Security">
+      <HintPath>..\..\ReCross.FE_1_0_1_11\Strills.WPF.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="CodeReason.Reports">
+      <HintPath>..\..\ReCross.FE_1_0_1_11\CodeReason.Reports.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data" />
+    <Reference Include="ReachFramework" />
+    <Reference Include="Strills.WPF.LicenseManagement">
+      <HintPath>..\..\ReCross.FE_1_0_1_11\Strills.WPF.LicenseManagement.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Deployment" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+</Project>
